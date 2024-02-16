@@ -7,10 +7,15 @@ public class GPSManager : MonoBehaviour
 {
     public Text GPSStatus;
     public Text latitude;
-    public Text longitute;
+    public Text longitude;
     public Text altitude;
     public Text horizontalAccuracy;
     public Text timeStamp;
+
+    private void Start()
+    {
+        StartCoroutine(GPSLocation());
+    }
 
     IEnumerator GPSLocation()
     {
@@ -45,7 +50,8 @@ public class GPSManager : MonoBehaviour
         }
         else
         {
-            //access granted
+            GPSStatus.text = "Running";
+            InvokeRepeating("UpdateGPSData", 0.5f, 1f);
         }
 
     }
@@ -54,7 +60,13 @@ public class GPSManager : MonoBehaviour
     {
         if(Input.location.status == LocationServiceStatus.Running)
         {
-            //access granted to gps values and has been initialized
+            GPSStatus.text = "Running";
+            latitude.text = Input.location.lastData.latitude.ToString();
+            longitude.text = Input.location.lastData.longitude.ToString();
+            altitude.text = Input.location.lastData.altitude.ToString();
+            timeStamp.text = Input.location.lastData.timestamp.ToString();
+
+            horizontalAccuracy.text = Input.location.lastData.horizontalAccuracy.ToString();
         }
         else
         {
