@@ -4,24 +4,25 @@ using Vuforia;
 
 public class CameraBehavior : MonoBehaviour
 {
-    public GameObject arCameraGameObj;
+    //public GameObject arCameraGameObj;
     public Camera arCameraComponent;
 
-    public GameObject canvasGameObj;
+    //public GameObject canvasGameObj;
 
-    //public Camera canvasCamera;
+    public Camera canvasCamera;
 
     private void Start()
     {
         arCameraComponent.enabled = false;
 
-        canvasGameObj.SetActive(true);
+        canvasCamera.enabled = true;
+        //canvasGameObj.SetActive(true);
 }
     public void ToggleCamera()
     {
         arCameraComponent.enabled = !arCameraComponent.enabled;
 
-        canvasGameObj.SetActive(!arCameraComponent.enabled);
-       // canvasCamera.gameObject.SetActive(arCameraComponent.enabled);
+       // canvasGameObj.SetActive(!arCameraComponent.enabled);
+        canvasCamera.gameObject.SetActive(false);
     }
 }
