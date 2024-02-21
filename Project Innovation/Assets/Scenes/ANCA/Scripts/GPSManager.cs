@@ -1,7 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Android;
 
 public class GPSManager : MonoBehaviour
 {
@@ -14,11 +14,25 @@ public class GPSManager : MonoBehaviour
 
     private void Start()
     {
+        if (!Permission.HasUserAuthorizedPermission(Permission.FineLocation))
+        {
+            Permission.RequestUserPermission(Permission.FineLocation);
+        }
+
         StartCoroutine(GPSLocation());
     }
 
     IEnumerator GPSLocation()
     {
+        // Check if user has granted location permission
+        if (!Permission.HasUserAuthorizedPermission(Permission.FineLocation))
+        {
+            // Handle case where permission is not granted
+            GPSStatus.text = "Location permission not granted";
+            yield break;
+        }
+       
+
         //check if user has location service enabled
         if (!Input.location.isEnabledByUser)
             yield break;
