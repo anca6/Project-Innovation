@@ -2,6 +2,8 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Android;
+using System;
+using System.Collections.Generic;
 
 public class GPSManager : MonoBehaviour
 {
@@ -12,6 +14,25 @@ public class GPSManager : MonoBehaviour
     public Text horizontalAccuracy;
     public Text timeStamp;
 
+    public float landmarkRadius = 100f; //landmark radius in meters to detect proximity
+
+    private Vector2 playerPos;
+
+    [SerializeField]
+    public GameObject cubeLandmark;
+
+    [SerializeField]
+    public GameObject map;
+
+    [Serializable]
+    public struct Landmark
+    {
+        public string name;
+        public Vector2 position;
+    }
+
+    public Dictionary<string, Landmark> landmarks = new Dictionary<string, Landmark> ();
+
     private void Start()
     {
         if (!Permission.HasUserAuthorizedPermission(Permission.FineLocation))
@@ -19,15 +40,22 @@ public class GPSManager : MonoBehaviour
             Permission.RequestUserPermission(Permission.FineLocation);
         }
 
+        InitializeLandmarks();
+        
+
         StartCoroutine(GPSLocation());
+    }
+
+    private void InitializeLandmarks()
+    {
+        landmarks.Add("Landmark1", new Landmark { name = "Ariensplein", position = new Vector2(52.220136f, 6.886714f) });
     }
 
     IEnumerator GPSLocation()
     {
-        // Check if user has granted location permission
+        //check if user granted app permission
         if (!Permission.HasUserAuthorizedPermission(Permission.FineLocation))
         {
-            // Handle case where permission is not granted
             GPSStatus.text = "Location permission not granted";
             yield break;
         }
@@ -81,11 +109,41 @@ public class GPSManager : MonoBehaviour
             timeStamp.text = Input.location.lastData.timestamp.ToString();
 
             horizontalAccuracy.text = Input.location.lastData.horizontalAccuracy.ToString();
+
+            playerPos = new Vector2(Input.location.lastData.latitude, Input.location.lastData.longitude);
+
+            CheckProximity();
         }
         else
         {
             //service stopped
         }
+    }
+
+    private void CheckProximity()
+    {
+        //kvp = key-value pair
+        foreach(KeyValuePair<string, Landmark> kvp in landmarks)
+        {
+            float distance = Vector2.Distance(playerPos, kvp.Value.position);
+            if(distance <= landmarkRadius)
+            {
+                Debug.Log("player is near landmark: " + kvp.Value.name);
+
+                Renderer cubeRenderer = cubeLandmark.GetComponent<Renderer>();
+
+                //change cube to green
+                cubeRenderer.material.color = Color.green;
+            }
+        }
+    }
+
+    public void EnableMap()
+    {
+        cubeLandmark.SetActive(true);
+        
+        map.SetActive(true);
+
     }
 
 }
