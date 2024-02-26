@@ -48,7 +48,7 @@ public class GPSManager : MonoBehaviour
 
     private void InitializeLandmarks()
     {
-        landmarks.Add("Landmark1", new Landmark { name = "Ariensplein", position = new Vector2(52.220136f, 6.886714f) });
+        landmarks.Add("Landmark1", new Landmark { name = "Main Building", position = new Vector2(52.220136f, 6.886714f) });
     }
 
     IEnumerator GPSLocation()
