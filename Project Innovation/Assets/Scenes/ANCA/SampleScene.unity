@@ -414,8 +414,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1051855003}
-        m_TargetAssemblyTypeName: GPSManager, Assembly-CSharp
+      - m_Target: {fileID: 1142184793}
+        m_TargetAssemblyTypeName: LandmarkManager, Assembly-CSharp
         m_MethodName: EnableMap
         m_Mode: 1
         m_Arguments:
@@ -1681,9 +1681,6 @@ MonoBehaviour:
   altitude: {fileID: 241850090}
   horizontalAccuracy: {fileID: 1579734974}
   timeStamp: {fileID: 685814843}
-  landmarkRadius: 100
-  cubeLandmark: {fileID: 203737904}
-  map: {fileID: 443923710}
 --- !u!4 &1051855004
 Transform:
   m_ObjectHideFlags: 0
@@ -1778,6 +1775,54 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1078478918}
   m_CullTransparentMesh: 1
+--- !u!1 &1142184791
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1142184792}
+  - component: {fileID: 1142184793}
+  m_Layer: 0
+  m_Name: LandmarkManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1142184792
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1142184791}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 46.12995, y: -1.5155456, z: 1824.6774}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1142184793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1142184791}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2479cc8f5f761a408324e89e8cf5096, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  landmarkRadius: 100
+  playerPos: {x: 0, y: 0}
+  cubeLandmark: {fileID: 203737904}
+  map: {fileID: 443923710}
 --- !u!1 &1258808049
 GameObject:
   m_ObjectHideFlags: 0
@@ -3006,3 +3051,4 @@ SceneRoots:
   - {fileID: 1051855004}
   - {fileID: 443923714}
   - {fileID: 203737908}
+  - {fileID: 1142184792}
