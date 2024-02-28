@@ -422,13 +422,15 @@ GameObject:
   - component: {fileID: 203737907}
   - component: {fileID: 203737906}
   - component: {fileID: 203737905}
+  - component: {fileID: 203737909}
+  - component: {fileID: 203737910}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!65 &203737905
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -515,6 +517,33 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 30, z: 0}
+--- !u!114 &203737909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 203737904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2479cc8f5f761a408324e89e8cf5096, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  landmarkRadius: 100
+  playerPos: {x: 0, y: 0}
+  modifier: {fileID: 0}
+--- !u!114 &203737910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 203737904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 928ca4dd09276c741a6ea7ddbc6344da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &241850088
 GameObject:
   m_ObjectHideFlags: 0
@@ -869,7 +898,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!64 &443923711
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1574,8 +1603,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   landmarkRadius: 100
   playerPos: {x: 0, y: 0}
-  cubeLandmark: {fileID: 203737904}
-  map: {fileID: 443923710}
+  modifier: {fileID: 0}
 --- !u!1 &1258808049
 GameObject:
   m_ObjectHideFlags: 0
