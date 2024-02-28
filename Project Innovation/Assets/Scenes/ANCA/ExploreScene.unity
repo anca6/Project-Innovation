@@ -1546,7 +1546,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!65 &1093332474
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1683,6 +1683,9 @@ MonoBehaviour:
   - name: Main Building
     position: {x: 52.21872, y: 6.88789}
     landmarkObject: {fileID: 203737904}
+  - name: Ariensplein
+    position: {x: 52.21891, y: 6.88804}
+    landmarkObject: {fileID: 1093332472}
 --- !u!1 &1258808049
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,9 +1,5 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using static LandmarkManager;
 
 public class LandmarkManager : MonoBehaviour
 {
@@ -17,10 +13,9 @@ public class LandmarkManager : MonoBehaviour
         public string name;
         public Vector2 position;
         public GameObject landmarkObject;
-    }   
+    } 
 
     public List<Landmark> landmarks = new List<Landmark>();
-
 
     public void CheckProximity()
     {
