@@ -28,14 +28,17 @@ public class LandmarkManager : MonoBehaviour
         foreach (var kvp in landmarks)
         //foreach (var landmark in landmarks.Values)
         {
-            //MeshRenderer meshRenderer = kvp.landmarkObject.GetComponent<MeshRenderer>();
+            //for the cube to turn green
+            MeshRenderer meshRenderer = kvp.landmarkObject.GetComponent<MeshRenderer>();
 
             float distance = Vector2.Distance(playerPos, kvp.position);
 
             if (distance <= landmarkRadius)
             {
+                //for the cue to turn green
+                meshRenderer.material.color = Color.green;
 
-                //meshRenderer.material.color = Color.green;
+                //kvp.landmarkObject.SetActive(false); //for the cube to disappear
             }
         }
     }
