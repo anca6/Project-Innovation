@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class ObjectModifier : MonoBehaviour
 {
-    public void ChangeLandmarkColor(LandmarkManager.Landmark landmark,  Color color)
+    public void ChangeLandmarkColor(GameObject landmarkObj,  Color color)
     {
-        MeshRenderer meshRenderer = landmark.gameObject.GetComponent<MeshRenderer>();
+        MeshRenderer meshRenderer = landmarkObj.GetComponent<MeshRenderer>();
 
         if(meshRenderer != null)
         {

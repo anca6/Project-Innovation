@@ -25,7 +25,7 @@ public class GPSManager : MonoBehaviour
 
         landmarkManager = FindObjectOfType<LandmarkManager>();
 
-        landmarkManager.InitializeLandmarks();
+        //landmarkManager.InitializeLandmarks();
         
 
         StartCoroutine(GPSLocation());

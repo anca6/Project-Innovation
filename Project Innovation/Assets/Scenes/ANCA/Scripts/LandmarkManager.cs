@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static LandmarkManager;
 
 public class LandmarkManager : MonoBehaviour
 {
@@ -9,60 +10,57 @@ public class LandmarkManager : MonoBehaviour
 
     public Vector2 playerPos;
 
-    [SerializeField]
-    private ObjectModifier modifier;
+    //public GameObject cubeLandmark;
 
-    [Serializable]
-    public struct Landmark
+    [System.Serializable]
+    public class Landmark
     {
         public string name;
         public Vector2 position;
+        public GameObject landmarkObject;
+    }   
 
-        public GameObject gameObject;
+    //private ObjectModifier modifier;
 
-        public Landmark(string landmarkName, Vector2 landmarkPosition, GameObject obj)
-        {
-            name = landmarkName;
-            position = landmarkPosition;    
-            gameObject = obj;   
-        }
-    }
+   /* [SerializeField]
+    private GameObjectDictionary landmarks = new GameObjectDictionary();*/
 
-    public Dictionary<string, Landmark> landmarks = new Dictionary<string, Landmark>();
+    public List<Landmark> landmarks = new List<Landmark>();
 
-
-    public void InitializeLandmarks()
+    private void Start()
     {
-        landmarks.Add("Landmark1", new Landmark { name = "Main Building", position = new Vector2(52.220136f, 6.886714f) });
+        //InitializeLandmarks();
     }
+
+    /*public void InitializeLandmarks()
+    {
+        landmarks.Add("Landmark1", new Landmark { name = "Main Building", position = new Vector2(52.21872f, 6.88789f) });
+        //landmarks.Add("Landmark2", new Landmark { name = "Aici", position = new Vector2(52.220199806690125f, 6.890546263450228f) });
+    }*/
 
     public void CheckProximity()
     {
         //kvp = key-value pair
-        /*foreach (KeyValuePair<string, Landmark> kvp in landmarks)*/
-        foreach (var landmark in landmarks.Values)
+        foreach (var kvp in landmarks)
+        //foreach (var landmark in landmarks.Values)
         {
-            float distance = Vector2.Distance(playerPos, landmark.position);
+
+            float distance = Vector2.Distance(playerPos, kvp.position);
 
             if (distance <= landmarkRadius)
             {
-                Debug.Log("player is near landmark: " + landmark.name);
+                //Debug.Log("player is near landmark: " + kvp.Value.name);
 
-                modifier.ChangeLandmarkColor(landmark, Color.green);
-
-                //Renderer cubeRenderer = landmarks.GetComponent<Renderer>();
+                //Renderer cubeRenderer = cubeLandmark.GetComponent<Renderer>();
 
                 //change cube to green
                 //cubeRenderer.material.color = Color.green;
+
+                //kvp.Value.enabled = false;
+                //modifier.ChangeLandmarkColor(kvp.Value.gameObject, Color.green);
+
+                kvp.landmarkObject.SetActive(false);
             }
         }
     }
-
-    /*public void EnableMap()
-    {
-        cubeLandmark.SetActive(true);
-
-        map.SetActive(true);
-
-    }*/
 }
