@@ -7,6 +7,7 @@ public class LandmarkManager : MonoBehaviour
 
     public Vector2 playerPos;
 
+    bool canClick = false;
     [System.Serializable]
     public class Landmark
     {
@@ -34,6 +35,19 @@ public class LandmarkManager : MonoBehaviour
                 meshRenderer.material.color = Color.green;
 
                 //kvp.landmarkObject.SetActive(false); //for the cube to disappear
+
+                canClick = true;
+            }
+        }
+    }
+
+    public void ShowPlantUI()
+    {
+        foreach(var kvp in landmarks)
+        {
+            if(canClick == true)
+            {
+
             }
         }
     }
