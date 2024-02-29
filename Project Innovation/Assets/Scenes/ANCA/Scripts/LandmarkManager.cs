@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class LandmarkManager : MonoBehaviour
+public class LandmarkManager : MonoBehaviour, IPointerClickHandler
 {
     public float landmarkRadius = 100f; //landmark radius in meters to detect proximity
 
@@ -17,6 +18,12 @@ public class LandmarkManager : MonoBehaviour
     } 
 
     public List<Landmark> landmarks = new List<Landmark>();
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        // This method will be called when the quad is clicked
+        Debug.Log("Quad clicked!");
+    }
 
     public void CheckProximity()
     {
