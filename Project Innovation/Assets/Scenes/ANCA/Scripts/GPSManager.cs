@@ -1,19 +1,46 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Android;
+using System;
+using System.Collections.Generic;
 
 public class GPSManager : MonoBehaviour
 {
     public Text GPSStatus;
     public Text latitude;
-    public Text longitute;
+    public Text longitude;
     public Text altitude;
     public Text horizontalAccuracy;
     public Text timeStamp;
 
+    private LandmarkManager landmarkManager;
+
+    private void Start()
+    {
+        if (!Permission.HasUserAuthorizedPermission(Permission.FineLocation))
+        {
+            Permission.RequestUserPermission(Permission.FineLocation);
+        }
+
+        landmarkManager = FindObjectOfType<LandmarkManager>();
+
+        //landmarkManager.InitializeLandmarks();
+        
+
+        StartCoroutine(GPSLocation());
+    }
+
     IEnumerator GPSLocation()
     {
+        //check if user granted app permission
+        if (!Permission.HasUserAuthorizedPermission(Permission.FineLocation))
+        {
+            GPSStatus.text = "Location permission not granted";
+            yield break;
+        }
+       
+
         //check if user has location service enabled
         if (!Input.location.isEnabledByUser)
             yield break;
@@ -45,7 +72,8 @@ public class GPSManager : MonoBehaviour
         }
         else
         {
-            //access granted
+            GPSStatus.text = "Running";
+            InvokeRepeating("UpdateGPSData", 0.5f, 1f);
         }
 
     }
@@ -54,7 +82,17 @@ public class GPSManager : MonoBehaviour
     {
         if(Input.location.status == LocationServiceStatus.Running)
         {
-            //access granted to gps values and has been initialized
+            GPSStatus.text = "Running";
+            latitude.text = Input.location.lastData.latitude.ToString();
+            longitude.text = Input.location.lastData.longitude.ToString();
+            altitude.text = Input.location.lastData.altitude.ToString();
+            //timeStamp.text = Input.location.lastData.timestamp.ToString();
+
+            horizontalAccuracy.text = Input.location.lastData.horizontalAccuracy.ToString();
+
+            landmarkManager.playerPos = new Vector2(Input.location.lastData.latitude, Input.location.lastData.longitude);
+
+            landmarkManager.CheckProximity();
         }
         else
         {
