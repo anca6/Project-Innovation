@@ -45,7 +45,7 @@ public class LandmarkManager : MonoBehaviour
         
     }
 
-    public void ShowPlantUI()
+    /*public void ShowPlantUI()
     {
         foreach(Landmark kvp in landmarks)
         {
@@ -54,5 +54,5 @@ public class LandmarkManager : MonoBehaviour
 
             }
         }
-    }
+    }*/
 }
