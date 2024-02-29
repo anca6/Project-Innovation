@@ -7,7 +7,7 @@ public class LandmarkManager : MonoBehaviour
 
     public Vector2 playerPos;
 
-    bool canClick = false;
+    //bool canClick = false;
     [System.Serializable]
     public class Landmark
     {
@@ -27,7 +27,7 @@ public class LandmarkManager : MonoBehaviour
             //for the cube to turn green
             //MeshRenderer meshRenderer = kvp.landmarkObject.GetComponent<MeshRenderer>();
 
-            canClick = true;
+            //canClick = true;
 
             float distance = Vector2.Distance(playerPos, kvp.position);
 
