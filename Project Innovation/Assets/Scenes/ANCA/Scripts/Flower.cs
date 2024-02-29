@@ -16,6 +16,8 @@ public class Flower : MonoBehaviour
     private void Start()
     {
         resourceManager = FindObjectOfType<ResourceManager>();
+        currentStage = GameManager.instance.flowerStage;
+        resourceManager.elixir = GameManager.instance.elixirCount;
     }
     public void Grow()
     {
@@ -25,7 +27,11 @@ public class Flower : MonoBehaviour
             if (currentStage < totalStages)
             {
                 currentStage++;
+                GameManager.instance.flowerStage++;
+
                 resourceManager.UseElixir(1);
+                GameManager.instance.elixirCount--;
+
                 UpdateVisualStage();
             }
             else
@@ -61,15 +67,20 @@ public class Flower : MonoBehaviour
         }
 
         // Set the current stage to active
-        if (currentStage < transform.childCount)
+        if (GameManager.instance.flowerStage < transform.childCount)
         {
-            transform.GetChild(currentStage).gameObject.SetActive(true);
+            transform.GetChild(GameManager.instance.flowerStage).gameObject.SetActive(true);
         }
         else
         {
             //Debug.LogError("current stage index is out of bounds");
             //show ui (this plant cant be grown anymore or sm like that)
         }
+    }
+
+    private void OnEnable()
+    {
+        UpdateVisualStage ();
     }
 
 }

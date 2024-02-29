@@ -7,15 +7,6 @@ public class FlowerManager : MonoBehaviour
     [SerializeField]
     private List<Flower> flowerList = new List<Flower>();
 
-    private void Start()
-    {
-        
-    }
-
-    private void Update()
-    {
-        
-    }
 
     public void AddFlower(Flower flower)
     {

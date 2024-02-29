@@ -1,31 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public void GoToNextScene()
+    public static GameManager instance;
+
+    public int flowerStage;
+    public int elixirCount;
+
+    void Awake()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
-    public void ReloadCurrentScene()
-    {
-        string currentSceneName = SceneManager.GetActiveScene().name;
-
-        SceneManager.LoadScene(currentSceneName);
-    }
-
-    public void GoToThisScene(string sceneName)
-    {
-        SceneManager.LoadScene(sceneName);
-    }
-
-    public void LeaveGame()
-    {
-        Application.Quit();
-    }
-
+    // Methods to manage game state
 }
-  
