@@ -21,11 +21,13 @@ public class LandmarkManager : MonoBehaviour
     public void CheckProximity()
     {
         //kvp = key-value pair
-        foreach (var kvp in landmarks)
+        foreach (Landmark kvp in landmarks)
         //foreach (var landmark in landmarks.Values)
         {
             //for the cube to turn green
             MeshRenderer meshRenderer = kvp.landmarkObject.GetComponent<MeshRenderer>();
+
+            canClick = true;
 
             float distance = Vector2.Distance(playerPos, kvp.position);
 
@@ -36,14 +38,16 @@ public class LandmarkManager : MonoBehaviour
 
                 //kvp.landmarkObject.SetActive(false); //for the cube to disappear
 
-                canClick = true;
+                //canClick = true;
             }
+            //canClick = false;
         }
+        
     }
 
     public void ShowPlantUI()
     {
-        foreach(var kvp in landmarks)
+        foreach(Landmark kvp in landmarks)
         {
             if(canClick == true)
             {
