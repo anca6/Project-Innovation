@@ -1,27 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class ResourceManager : MonoBehaviour
+public class Resource : MonoBehaviour
 {
-    public int water;
-    public int elixir;
+    [SerializeField]
+    GameManager gameManager;
 
-   public void AddElixir(int amount)
-    {
-        elixir += amount;
-        Debug.Log("elixir amount: " +  elixir); 
-    }
+    [SerializeField]
+    ResourceManager resourceManager;
 
-    public void UseElixir(int amount)
+    [SerializeField]
+    LandmarkManager landmarkManager;
+    public void OnClick()
     {
-        if(elixir >= amount)
+        if (landmarkManager != null && landmarkManager.canClick)
         {
-            elixir -= amount;
-        }
-        else
-        {
-            Debug.Log("not enough elixir");
+                resourceManager.AddElixir(1);
+                Debug.Log("RESOURCE ADDED");
+
+                gameObject.SetActive(false);
+
         }
     }
 }

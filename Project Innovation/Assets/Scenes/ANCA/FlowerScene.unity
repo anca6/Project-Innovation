@@ -498,11 +498,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 484460183}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f50fc065771b07347888aa6acbf2b587, type: 3}
+  m_Script: {fileID: 11500000, guid: 03107abf3d8d8d54a84769b06ac5aa7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  water: 5
-  elixir: 5
+  water: 0
+  elixir: 0
 --- !u!1 &549039756
 GameObject:
   m_ObjectHideFlags: 0

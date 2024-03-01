@@ -24,29 +24,24 @@ public class LandmarkManager : MonoBehaviour
 
     public void CheckProximity()
     {
+        bool isInRadius = false;
         //kvp = key-value pair
         foreach (Landmark kvp in landmarks)
         //foreach (var landmark in landmarks.Values)
         {
-            //for the cube to turn green
-            MeshRenderer meshRenderer = kvp.landmarkObject.GetComponent<MeshRenderer>();
-
-            //canClick = true;
-
             float distance = Vector2.Distance(playerPos, kvp.position);
 
             if (distance <= landmarkRadius)
             {
-                //for the cue to turn green
+                //for the cube to turn green
+                MeshRenderer meshRenderer = kvp.landmarkObject.GetComponent<MeshRenderer>();
                 meshRenderer.material.color = Color.green;
 
-                //kvp.landmarkObject.SetActive(false); //for the cube to disappear
-
-                canClick = true;
+                isInRadius = true;  
             }
-            canClick = false;
         }
-        
+        canClick = isInRadius;
+
     }
 
 }

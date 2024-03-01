@@ -910,11 +910,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 484460183}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f50fc065771b07347888aa6acbf2b587, type: 3}
+  m_Script: {fileID: 11500000, guid: 03107abf3d8d8d54a84769b06ac5aa7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  water: 5
-  elixir: 5
+  water: 0
+  elixir: 0
 --- !u!1 &490038209
 GameObject:
   m_ObjectHideFlags: 0
@@ -2150,7 +2150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flowerStage: 0
-  elixirCount: 5
+  elixirCount: 1
 --- !u!1 &1579734972
 GameObject:
   m_ObjectHideFlags: 0
@@ -2464,6 +2464,7 @@ GameObject:
   - component: {fileID: 1714648717}
   - component: {fileID: 1714648720}
   - component: {fileID: 1714648721}
+  - component: {fileID: 1714648722}
   m_Layer: 0
   m_Name: Quad
   m_TagString: Untagged
@@ -2594,6 +2595,35 @@ MonoBehaviour:
   gameManager: {fileID: 1430216766}
   resourceManager: {fileID: 484460185}
   landmarkManager: {fileID: 1142184793}
+--- !u!114 &1714648722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1714648715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1714648721}
+          m_TargetAssemblyTypeName: Resource, Assembly-CSharp
+          m_MethodName: OnClick
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1744031433
 GameObject:
   m_ObjectHideFlags: 0

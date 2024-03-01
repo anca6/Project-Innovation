@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class RotateObj : MonoBehaviour
 {
-    private Quaternion rotation;
-    private Vector3 position;
-
     private void Update()
     {
         if (Input.touchCount == 1)
