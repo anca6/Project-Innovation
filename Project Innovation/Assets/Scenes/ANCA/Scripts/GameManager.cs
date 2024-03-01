@@ -20,5 +20,5 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // Methods to manage game state
+    
 }
