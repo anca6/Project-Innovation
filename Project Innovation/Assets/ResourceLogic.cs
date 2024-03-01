@@ -33,16 +33,13 @@ public class Resource : MonoBehaviour
 
     public void OnClick()
     {
-        if (landmarkManager != null)
+        if (landmarkManager != null && landmarkManager.canClick)
         {
-            if (landmarkManager.canClick)
-            {
                 resourceManager.AddElixir(1);
                 Debug.Log("RESOURCE ADDED");
 
                 gameObject.SetActive(false);
 
-            }
         }
     }
 }
