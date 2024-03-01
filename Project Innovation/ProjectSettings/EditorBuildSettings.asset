@@ -9,9 +9,15 @@ EditorBuildSettings:
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
-    path: Assets/Scenes/ANCA/GardenScene.unity
-    guid: 0c67c7b2d3baada4f87136c0f7d8aa61
-  - enabled: 1
     path: Assets/Scenes/ANCA/ExploreScene.unity
     guid: 0ae024e43a4234144b60e141ccff5970
+  - enabled: 1
+    path: Assets/Scenes/ANCA/GardenScene.unity
+    guid: de208f3f49354984db77e6f61c26b0a1
+  - enabled: 1
+    path: Assets/Scenes/ANCA/FlowerScene.unity
+    guid: 8553615638b6d244bb1d2cad0ed78170
+  - enabled: 1
+    path: Assets/Scenes/ANCA/JournalScene.unity
+    guid: 90370ad7a3237c5499b7e9db8fbb24f3
   m_configObjects: {}
