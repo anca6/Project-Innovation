@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
 {
-    private List<Seed> inventory = new List<Seed>();
+    public List<Seed> inventory = new List<Seed>();
     private Dictionary<string, string> seedToFlower = new Dictionary<string, string>
     {
         { "SeedType1","FlowerType1" },
