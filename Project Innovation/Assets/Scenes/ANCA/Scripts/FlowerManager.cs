@@ -7,17 +7,6 @@ public class FlowerManager : MonoBehaviour
     [SerializeField]
     private List<Flower> flowerList = new List<Flower>();
 
-
-    public void AddFlower(Flower flower)
-    {
-        flowerList.Add(flower);
-    }
-
-    public void RemoveFlower(Flower flower)
-    {
-        flowerList.Remove(flower);
-    }
-
     public void GrowFLower(Flower flower)
     {
         flower.Grow();
@@ -31,11 +20,5 @@ public class FlowerManager : MonoBehaviour
             flower.Grow();
             flower.UpdateVisualStage();
         }
-    }
-
-    public void OnFlowerInteraction(Flower flower)
-    {
-        //if(journal.currentStage != null)
-        //check flower stage and update journal
     }
 }
