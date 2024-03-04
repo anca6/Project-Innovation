@@ -5,13 +5,23 @@ using UnityEngine;
 public class InventoryUI : MonoBehaviour
 {
     public InventoryManager inventoryManager;
-    public GameObject inventoryPrefab;
     public Transform gridContainer;
 
+
+    private Dictionary<string, GameObject> seedPrefabs = new Dictionary<string, GameObject>();
     private void Start()
     {
+        LoadSeedPrefabs();
+
         FillInventoryGrid();
     }
+
+    private void LoadSeedPrefabs()
+    {
+        seedPrefabs["SeedType1"] = Resources.Load<GameObject>("Prefabs/SeedType1");
+        seedPrefabs["SeedType2"] = Resources.Load<GameObject>("Prefabs/SeedType2");
+    }
+
 
     public void FillInventoryGrid()
     {
@@ -20,16 +30,40 @@ public class InventoryUI : MonoBehaviour
             Destroy(child.gameObject);
         }
 
-        foreach(var seed in inventoryManager.inventory)
+        foreach (var seed in inventoryManager.inventory)
         {
-            GameObject gridSlot = Instantiate(inventoryPrefab, gridContainer);
+            // Instantiate the seed GameObject for each seed
+            for (int i = 0; i < seed.Quantity; i++)
+            {
+                GameObject seedObject = Instantiate(GetSeedPrefab(seed.Type), gridContainer);
 
-            //GameObject seedObject = Instantiate(GetSeedPrefab(seed.Type), inventoryPrefab.transform);
+                Debug.Log("instantiate?");
+                // Optionally, adjust the seedObject's position or scale to fit within the grid slot
+            }
         }
     }
 
-   /* private GameObject GetSeedPrefab(string seedType)
+    private GameObject GetSeedPrefab(string seedType)
     {
-        return Resources.Load<GameObject>("Prefabs/SeedPrefab");
-    }*/
+        if(seedPrefabs.TryGetValue(seedType, out GameObject prefab))
+        {
+            return prefab;
+        }
+        else
+        {
+            Debug.Log("seed prefab not found for type: " + seedType);
+            return null;
+
+        }
+    }
+
+    private void OnEnable()
+    {
+        InventoryManager.onInventoryChanged += FillInventoryGrid;
+    }
+
+    private void OnDisable()
+    {
+        InventoryManager.onInventoryChanged -= FillInventoryGrid;   
+    }
 }
