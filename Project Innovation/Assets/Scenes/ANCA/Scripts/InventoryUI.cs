@@ -8,7 +8,7 @@ public class InventoryUI : MonoBehaviour
     public InventoryManager inventoryManager;
     public Transform gridContainer;
 
-    public GameObject textPrefab;
+   // public GameObject textPrefab;
 
 
     private Dictionary<string, GameObject> seedPrefabs = new Dictionary<string, GameObject>();
@@ -40,8 +40,14 @@ public class InventoryUI : MonoBehaviour
                 GameObject seedObject = Instantiate(GetSeedPrefab(seed.Type), gridContainer);
             }
 
+            /*GameObject textObject = gridContainer.Find(seed.Type + "Text")?.gameObject;
+            if(textObject == null)
+            {
+                textObject = Instantiate(textPrefab, gridContainer);
+                textObject.name = seed.Type + "Text";   
+            }
                 Text textComponent = textPrefab.GetComponent<Text>(); ;
-                textComponent.text = $"{seed.Quantity}";
+                textComponent.text = $"{seed.Quantity}";*/
         }
     }
 
