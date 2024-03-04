@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InventoryUI : MonoBehaviour
 {
     public InventoryManager inventoryManager;
     public Transform gridContainer;
+
+    public GameObject textPrefab;
 
 
     private Dictionary<string, GameObject> seedPrefabs = new Dictionary<string, GameObject>();
@@ -30,16 +33,15 @@ public class InventoryUI : MonoBehaviour
             Destroy(child.gameObject);
         }
 
-        foreach (var seed in inventoryManager.inventory)
+        foreach(var seed in inventoryManager.inventory)
         {
-            // Instantiate the seed GameObject for each seed
-            for (int i = 0; i < seed.Quantity; i++)
+            for(int i= 0; i < seed.Quantity; i++)
             {
                 GameObject seedObject = Instantiate(GetSeedPrefab(seed.Type), gridContainer);
-
-                Debug.Log("instantiate?");
-                // Optionally, adjust the seedObject's position or scale to fit within the grid slot
             }
+
+                Text textComponent = textPrefab.GetComponent<Text>(); ;
+                textComponent.text = $"{seed.Quantity}";
         }
     }
 
@@ -53,7 +55,6 @@ public class InventoryUI : MonoBehaviour
         {
             Debug.Log("seed prefab not found for type: " + seedType);
             return null;
-
         }
     }
 
