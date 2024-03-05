@@ -10,6 +10,12 @@ public class FlowerManager : MonoBehaviour
     public void GrowFLower(Flower flower)
     {
         flower.Grow();
+        /*journalManager.updateEntry();
+
+        if(FlowerManager.currentStage == " ")
+        {
+            gameOject.setActive(true);
+        }*/
         flower.UpdateVisualStage();
     }
 

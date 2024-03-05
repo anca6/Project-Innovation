@@ -36,7 +36,7 @@ public class InventoryManager : MonoBehaviour
         }
         else
         {
-            inventory.Add(new Seed(seedType, 1));
+            //inventory.Add(new Seed(seedType, 1));
             Debug.Log("seed added " + seedType);
             onInventoryChanged?.Invoke();
         }
