@@ -32,7 +32,16 @@ public class DragAndDrop : MonoBehaviour
 
     void OnMouseUp()
     {
-        //transform.position = startingPos;
-        //transform.GetComponent<Collider>().enabled = true;
+        var rayOrigin = myCamera.transform.position;
+        var rayDirection = MouseWorldPosition() - myCamera.transform.position;
+        
+        if(Physics.Raycast(rayOrigin, rayDirection, out RaycastHit hitInfo))
+        {
+            Debug.Log("dropped on target");
+        }
+        else
+        {
+            transform.position = startingPos;
+        }
     }
 }
