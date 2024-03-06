@@ -39,7 +39,7 @@ EditorBuildSettings:
     path: Assets/Scenes/ROBERT/Scenes/SETTINGS.unity
     guid: 5756fe671b06f4427b6fb595b979e3ab
   - enabled: 1
-    path: Assets/Scenes/ROBERT/Scenes/BACKPACK.unity
+    path: Assets/Scenes/ROBERT/Scenes/old_BACKPACK.unity
     guid: edbcfb9e266d546e99bcfb1802c4dcb8
   - enabled: 1
     path: Assets/Scenes/RARES/Scenes/GARDEN_RA.unity
