@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -23,6 +22,7 @@ public class NewInventoryManager : MonoBehaviour
     {
         for (int i = 0; i < inventorySlots.Length; i++)
         {
+            //Image spriteImage = GetComponent<Image>();
             if (inventorySlots[i].GetComponent<Image>().sprite == null)
             {
                 inventorySlots[i].GetComponent<Image>().sprite = itemSprite;
@@ -46,7 +46,7 @@ public class NewInventoryManager : MonoBehaviour
         Sprite sprite = Resources.Load<Sprite>(path);
         if (sprite == null)
         {
-            Debug.LogError($"Failed to load sprite for seed type: {type}. Check the Resources folder structure and sprite names.");
+            Debug.LogError($"Failed to load sprite for seed type: {type}");
         }
         return sprite;
     }
