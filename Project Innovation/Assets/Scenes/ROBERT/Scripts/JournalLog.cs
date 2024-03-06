@@ -1,13 +1,13 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Numerics;
 using UnityEngine;
 
 public class JournalLog : MonoBehaviour
 {
+    public static JournalLog Instance { get; private set; }
 
-    [SerializeField] private List<GameObject> items = new List<GameObject>(); //setup array list
-    private int currentItem = 0; //bool to keep track of the current item
+    [SerializeField] private List<GameObject> items = new List<GameObject>();
+    private int currentItem = 0;
+    private List<int> unlockedEntries = new List<int>();
 
     private void Update()
     {
@@ -16,10 +16,10 @@ public class JournalLog : MonoBehaviour
     }
 
     private void ActivateLog()
-    { //takes control of activating items
+    {
         for (int i = 0; i < items.Count; i++)
         {
-            if (i == currentItem)
+            if (unlockedEntries.Contains(i))
             {
                 items[i].SetActive(true);
             }
@@ -31,12 +31,12 @@ public class JournalLog : MonoBehaviour
     }
 
     private void CheckCurrentLog()
-    { //make sure current item doesn't exceed the list
+    {
         if (currentItem < 0)
         {
-            currentItem = items.Count - 1;
+            currentItem = unlockedEntries.Count - 1;
         }
-        if (currentItem > items.Count - 1)
+        if (currentItem >= unlockedEntries.Count)
         {
             currentItem = 0;
         }
@@ -44,13 +44,26 @@ public class JournalLog : MonoBehaviour
 
     public void SelectPreviousItem()
     {
-        currentItem--;
+        if (unlockedEntries.Count > 1)
+        {
+            currentItem--;
+        }
     }
 
-    // Public method to select the next item
     public void SelectNextItem()
     {
-        currentItem++;
+        if (unlockedEntries.Count > 1)
+        {
+            currentItem++;
+        }
     }
 
+    public void UnlockEntry(int entryIndex)
+    {
+        if (!unlockedEntries.Contains(entryIndex))
+        {
+            unlockedEntries.Add(entryIndex);
+            unlockedEntries.Sort(); // Ensure the list is sorted
+        }
+    }
 }

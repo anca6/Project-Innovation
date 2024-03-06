@@ -9,7 +9,7 @@ public class Resource : MonoBehaviour
     ResourceManager resourceManager;
 
     [SerializeField]
-    InventoryManager inventoryManager;
+    NewInventoryManager inventoryManager;
 
     [SerializeField]
     LandmarkManager landmarkManager;
