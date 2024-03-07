@@ -2097,6 +2097,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1490779787}
+        m_TargetAssemblyTypeName: TimerController, Assembly-CSharp
+        m_MethodName: StartTimer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &469980637
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6741,9 +6753,9 @@ RectTransform:
   m_LocalScale: {x: 28.347813, y: 54.90792, z: 20.430857}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1853736841}
   - {fileID: 615804792}
   - {fileID: 1954175173}
-  - {fileID: 1853736841}
   - {fileID: 1530031923}
   - {fileID: 1743191836}
   - {fileID: 1573382519}
@@ -6769,7 +6781,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerText: {fileID: 1853736842}
-  duration: 30
+  duration: 10
+  disablePanel: {fileID: 1490779785}
+  gardenTileButton: {fileID: 2054064314}
 --- !u!1 &1530031922
 GameObject:
   m_ObjectHideFlags: 0
@@ -7823,6 +7837,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timerText: {fileID: 0}
   duration: 30
+  disablePanel: {fileID: 0}
+  gardenTileButton: {fileID: 0}
 --- !u!1001 &1685403948
 PrefabInstance:
   m_ObjectHideFlags: 0

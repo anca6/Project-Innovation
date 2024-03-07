@@ -1,14 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class TimerController : MonoBehaviour
 {
-    public TMP_Text timerText;
+    public TextMeshProUGUI timerText;
     private float startTime;
     private bool timerStarted = false;
     public float duration = 30f;
+
+    public GameObject disablePanel;
+
+    public Button gardenTileButton;
 
     private void Update()
     {
@@ -23,7 +26,8 @@ public class TimerController : MonoBehaviour
 
             if (remainingTime <= 0f)
             {
-                Destroy(gameObject);
+                disablePanel.SetActive(false);
+                gardenTileButton.interactable = false;
             }
         }
     }
