@@ -7116,7 +7116,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timerText: {fileID: 1853736842}
   growthTimerText: {fileID: 628022928}
-  duration: 30
+  duration: 32
+  growthStartTime: 0
+  growthTimerStarted: 0
   growthDuration: 15
 --- !u!1 &1530031922
 GameObject:
@@ -8102,7 +8104,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1683887846}
   - component: {fileID: 1683887847}
-  - component: {fileID: 1683887848}
   m_Layer: 0
   m_Name: FlowerObject
   m_TagString: Untagged
@@ -8158,24 +8159,6 @@ MonoBehaviour:
   journalLog: {fileID: 1056822099}
   entryIndex: 2
   timerController: {fileID: 1490779787}
-  growthTimerController: {fileID: 1490779787}
-  growthDuration: 30
---- !u!114 &1683887848
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1683887845}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6fb33a1ace57ed548a7d4ec2ebad7ab7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timerText: {fileID: 1853736842}
-  growthTimerText: {fileID: 628022928}
-  duration: 30
-  growthDuration: 30
 --- !u!1001 &1685403948
 PrefabInstance:
   m_ObjectHideFlags: 0
