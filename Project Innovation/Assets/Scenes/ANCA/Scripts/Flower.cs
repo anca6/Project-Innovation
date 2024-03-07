@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,34 +16,24 @@ public class Flower : MonoBehaviour
     [SerializeField]
     public GameObject[] statusBar;
 
-    /*[SerializeField]
-    public GameObject[] roseStagePrefabs;*/
-
-   /* [SerializeField]
-    public GameObject[] lilyStagePrefabs;*/
-
-    // Add more arrays as needed for different types
-
-
     private ResourceManager resourceManager;
 
-    /*[SerializeField]
-    private Dictionary<string, GameObject[]> flowerPrefabs = new Dictionary<string, GameObject[]>();*/
+    public JournalLog journalLog;
+
+    [SerializeField]
+    private int entryIndex;
 
     private void Start()
     {
         resourceManager = FindObjectOfType<ResourceManager>();
         currentStage = GameManager.instance.flowerStage;
         resourceManager.elixir = GameManager.instance.elixirCount;
-
-        /*flowerPrefabs.Add("Type1", new GameObject[] { *//* Prefabs for Type1 *//* });
-        flowerPrefabs.Add("Type2", new GameObject[] { *//* Prefabs for Type2 *//* });*/
     }
     public void Grow()
     {
         if (resourceManager.elixir >= 1)
         {
-            if (currentStage < totalStages)
+            if (currentStage < totalStages - 1) // Adjusted condition
             {
                 currentStage++;
                 GameManager.instance.flowerStage++;
@@ -56,6 +47,11 @@ public class Flower : MonoBehaviour
                 // Optionally, update the status bar colors here
                 UpdateStatusBarColors();
             }
+            else if (currentStage == totalStages - 1) // Check if it's the last stage
+            {
+                journalLog.UnlockEntry(entryIndex);
+                Debug.Log("3rd entry!");
+            }
             else
             {
                 Debug.Log("flower reached last stage");
@@ -66,10 +62,9 @@ public class Flower : MonoBehaviour
             Debug.Log("not enough elixir!");
         }
     }
+
     public GameObject GetStagePrefab()
     {
-        // Get the prefab array for the current flower type
-        //GameObject[] stagePrefabs = flowerPrefabs[type];
 
         // Check if the current stage is within the bounds of the prefab array
         if (currentStage < stagePrefabs.Length)
@@ -83,38 +78,6 @@ public class Flower : MonoBehaviour
             return null;
         }
     }
-
-    /*public GameObject GetStagePrefab()
-    {
-        GameObject[] selectedPrefabs = null;
-
-        // Use a switch statement to select the correct prefab array based on the type
-        switch (type)
-        {
-            case "Rose":
-                selectedPrefabs = roseStagePrefabs;
-                break;
-            case "Lily":
-                selectedPrefabs = lilyStagePrefabs;
-                break;
-            // Add more cases as needed for different types
-            default:
-                Debug.LogError("Unknown flower type: " + type);
-                break;
-        }
-
-        // Check if the current stage is within the bounds of the selected prefab array
-        if (currentStage < selectedPrefabs.Length)
-        {
-            // Return the prefab for the current stage
-            return selectedPrefabs[currentStage];
-        }
-        else
-        {
-            Debug.Log("Flower is at its last stage");
-            return null;
-        }
-    }*/
 
     public void UpdateVisualStage()
     {
@@ -136,8 +99,6 @@ public class Flower : MonoBehaviour
         }
     }
 
-
-
     public void UpdateStatusBarColors()
     {
         // Loop through all rectangles in the status bar
@@ -148,9 +109,14 @@ public class Flower : MonoBehaviour
             if (imageComponent != null)
             {
                 // Change the color based on the rectangle's position
-                if (i <= currentStage )
+                if (i < currentStage)
                 {
                     // Change the color of rectangles up to the current stage to green
+                    imageComponent.color = Color.green;
+                }
+                else if (i == currentStage)
+                {
+                    // Change the color of the current stage to green
                     imageComponent.color = Color.green;
                 }
                 else
@@ -167,10 +133,9 @@ public class Flower : MonoBehaviour
     }
 
 
-
     private void OnEnable()
     {
-        UpdateVisualStage ();
+        UpdateVisualStage();
         UpdateStatusBarColors();
     }
 

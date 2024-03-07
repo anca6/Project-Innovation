@@ -7,11 +7,10 @@ public class Seed
     public int Quantity { get; set; }
     public GameObject FlowerPrefab { get; set; }
 
-    public Seed(string type, string flowerType, int quantity/*, GameObject flowerPrefab*/)
+    public Seed(string type, string flowerType, int quantity)
     {
         Type = type;
         FlowerType = flowerType;
         Quantity = quantity;
-        //FlowerPrefab = flowerPrefab; // Initialize the prefab here
     }
 }

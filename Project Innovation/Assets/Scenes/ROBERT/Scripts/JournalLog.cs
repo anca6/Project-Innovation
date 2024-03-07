@@ -5,9 +5,21 @@ public class JournalLog : MonoBehaviour
 {
     public static JournalLog Instance { get; private set; }
 
-    [SerializeField] private List<GameObject> items = new List<GameObject>();
-    private int currentItem = 0;
-    private List<int> unlockedEntries = new List<int>();
+    [SerializeField] private List<JournalEntry> journalEntries = new List<JournalEntry>();
+    private int currentItemIndex = 0;
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject); // Make the GameObject persistent
+        }
+        else
+        {
+            Destroy(gameObject); // Destroy duplicates
+        }
+    }
 
     private void Update()
     {
@@ -17,53 +29,115 @@ public class JournalLog : MonoBehaviour
 
     private void ActivateLog()
     {
-        for (int i = 0; i < items.Count; i++)
+        int activeIndex = -1;
+        for (int i = 0; i < journalEntries.Count; i++)
         {
-            if (unlockedEntries.Contains(i))
+            if (journalEntries[i].IsUnlocked)
             {
-                items[i].SetActive(true);
+                if (currentItemIndex == i)
+                {
+                    activeIndex = i;
+                    break;
+                }
+                else if (activeIndex == -1)
+                {
+                    activeIndex = i;
+                }
             }
-            else
+        }
+
+        if (activeIndex != -1)
+        {
+            for (int i = 0; i < journalEntries.Count; i++)
             {
-                items[i].SetActive(false);
+                journalEntries[i].GameObject.SetActive(i == activeIndex);
             }
+        }
+    }
+
+    private int FindNextUnlockedEntry(int startIndex)
+    {
+        int nextIndex = startIndex;
+        do
+        {
+            nextIndex = (nextIndex + 1) % journalEntries.Count;
+        } while (!journalEntries[nextIndex].IsUnlocked && nextIndex != startIndex);
+
+        return nextIndex;
+    }
+
+    public void NavigateToNextUnlockedEntry()
+    {
+        int nextIndex = currentItemIndex + 1;
+        while (nextIndex < journalEntries.Count && !journalEntries[nextIndex].IsUnlocked)
+        {
+            nextIndex++;
+        }
+        if (nextIndex < journalEntries.Count)
+        {
+            currentItemIndex = nextIndex;
+            ActivateLog();
+        }
+    }
+
+    public void NavigateToPreviousUnlockedEntry()
+    {
+        int prevIndex = currentItemIndex - 1;
+        while (prevIndex >= 0 && !journalEntries[prevIndex].IsUnlocked)
+        {
+            prevIndex--;
+        }
+        if (prevIndex >= 0)
+        {
+            currentItemIndex = prevIndex;
+            ActivateLog();
         }
     }
 
     private void CheckCurrentLog()
     {
-        if (currentItem < 0)
+        if (currentItemIndex < 0)
         {
-            currentItem = unlockedEntries.Count - 1;
+            currentItemIndex = journalEntries.Count - 1;
         }
-        if (currentItem >= unlockedEntries.Count)
+        if (currentItemIndex >= journalEntries.Count)
         {
-            currentItem = 0;
+            currentItemIndex = 0;
         }
     }
 
     public void SelectPreviousItem()
     {
-        if (unlockedEntries.Count > 1)
-        {
-            currentItem--;
-        }
+        currentItemIndex--;
     }
 
     public void SelectNextItem()
     {
-        if (unlockedEntries.Count > 1)
+        currentItemIndex++;
+    }
+
+    // Method to unlock a journal entry
+    public void UnlockEntry(int entryIndex)
+    {
+        if (entryIndex >= 0 && entryIndex < journalEntries.Count)
         {
-            currentItem++;
+            journalEntries[entryIndex].IsUnlocked = true;
+            currentItemIndex = entryIndex; // Update the currentItemIndex to the unlocked entry
         }
     }
 
-    public void UnlockEntry(int entryIndex)
+}
+
+[System.Serializable]
+public class JournalEntry
+{
+    public GameObject GameObject; // Reference to the GameObject representing the journal entry
+    public bool IsUnlocked; // Indicates whether the journal entry is unlocked
+
+    // Constructor to initialize a journal entry
+    public JournalEntry(GameObject gameObject)
     {
-        if (!unlockedEntries.Contains(entryIndex))
-        {
-            unlockedEntries.Add(entryIndex);
-            unlockedEntries.Sort(); // Ensure the list is sorted
-        }
+        GameObject = gameObject;
+        IsUnlocked = false; // Default to locked
     }
 }
