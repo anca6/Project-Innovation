@@ -46,7 +46,7 @@ public class Flower : MonoBehaviour
 
     public void Grow()
     {
-        if (/*timerController.growthTimerElapsed ||*/ resourceManager.elixir >= 1)
+        if (timerController.growthTimerElapsed || resourceManager.elixir >= 1)
         {
             if (currentStage < totalStages - 1) 
             {

@@ -4,19 +4,16 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
+    [HideInInspector]
     public int flowerStage;
+    [HideInInspector]
     public int elixirCount;
 
-    void Awake()
+    private void Awake()
     {
         if (instance == null)
-        {
             instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
         else
-        {
             Destroy(gameObject);
-        }
     }
 }

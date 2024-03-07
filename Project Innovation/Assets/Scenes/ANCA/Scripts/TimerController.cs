@@ -89,10 +89,12 @@ public class TimerController : MonoBehaviour
 
     private void UpdateGrowthTimer()
     {
+        Debug.LogWarning("flower component not found");
         float elapsedTime = Time.time - growthStartTime;
         float remainingTime = Mathf.Max(0f, growthDuration - elapsedTime);
         UpdateText(growthTimerText, remainingTime);
-        if (remainingTime <= 0f)
+        //Debug.LogWarning(remainingTime);
+        if (remainingTime <= 0.1f)
         {
             growthTimerElapsed = true;
             //StopGrowthTimer();
