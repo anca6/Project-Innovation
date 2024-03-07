@@ -13,7 +13,7 @@ public class Resource : MonoBehaviour
 
     [SerializeField]
     LandmarkManager landmarkManager;
-    public void OnClick()
+    public void OnMouseDown()
     {
         //if (landmarkManager != null && landmarkManager.canClick)
         //{
@@ -22,7 +22,7 @@ public class Resource : MonoBehaviour
 
             Debug.Log("RESOURCE ADDED");
 
-            gameObject.SetActive(false);
+            //gameObject.SetActive(false);
 
         //}
     }
