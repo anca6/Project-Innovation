@@ -66,6 +66,7 @@ public class Flower : MonoBehaviour
             else if (currentStage == totalStages - 1)
             {
                 currentStage++;
+                GameManager.instance.flowerStage++;
                 journalLog.UnlockEntry(entryIndex);
                 Debug.Log("3rd entry!");
                 UpdateStatusBarColors();
