@@ -21,12 +21,42 @@ public class Flower : MonoBehaviour
     [SerializeField]
     private int entryIndex;
 
+    [SerializeField] 
+    TimerController timerController;
+
+    [SerializeField]
+    TimerController growthTimerController; // Reference to the growth timer controller
+
+    private bool growthTimerStarted = false;
+    private float growthStartTime;
+    public float growthDuration = 30f; // Duration for each growth stage in seconds
+
     private void Start()
     {
         resourceManager = FindObjectOfType<ResourceManager>();
         currentStage = GameManager.instance.flowerStage;
         resourceManager.elixir = GameManager.instance.elixirCount;
     }
+
+    public void StartGrowthTimer()
+    {
+        growthTimerStarted = true;
+        growthStartTime = Time.time;
+    }
+
+    private void Update()
+    {
+        if (growthTimerStarted)
+        {
+            float elapsedTime = Time.time - growthStartTime;
+            if (elapsedTime >= growthDuration)
+            {
+                Grow();
+                StartGrowthTimer(); // Restart the growth timer for the next stage
+            }
+        }
+    }
+
     public void Grow()
     {
         if (resourceManager.elixir >= 1)
@@ -39,6 +69,8 @@ public class Flower : MonoBehaviour
                 resourceManager.UseElixir(1);
                 GameManager.instance.elixirCount--;
 
+                timerController.ResetGrowthTimer();
+
                 // Update the visual stage to reflect the growth
                 UpdateVisualStage();
 
@@ -49,6 +81,10 @@ public class Flower : MonoBehaviour
             {
                 journalLog.UnlockEntry(entryIndex);
                 Debug.Log("3rd entry!");
+
+                timerController.StopTimer();
+                timerController.StopGrowthTimer();
+                timerController.HideTimer();
             }
             else
             {
@@ -82,12 +118,6 @@ public class Flower : MonoBehaviour
         // Loop through all child GameObjects (stages) and set them to inactive
         foreach (Transform child in transform)
         {
-            TextMeshPro textComponent = GetComponentInChildren<TextMeshPro>();
-            if (textComponent)
-            {
-                child.gameObject.SetActive(true);
-            }
-            else 
             child.gameObject.SetActive(false);
         }
 
