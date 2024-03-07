@@ -1,6 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
-using Vuforia;
 
 public class CameraBehavior : MonoBehaviour
 {
