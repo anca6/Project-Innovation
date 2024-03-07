@@ -1,4 +1,3 @@
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -66,9 +65,10 @@ public class Flower : MonoBehaviour
             }
             else if (currentStage == totalStages - 1)
             {
+                currentStage++;
                 journalLog.UnlockEntry(entryIndex);
                 Debug.Log("3rd entry!");
-
+                UpdateStatusBarColors();
                 timerController.StopTimer();
                 timerController.StopGrowthTimer();
                 timerController.HideTimer();
@@ -120,6 +120,7 @@ public class Flower : MonoBehaviour
 
     public void UpdateStatusBarColors()
     {
+        //Debug.LogWarning(currentStage);
         for (int i = 0; i < statusBar.Length; i++)
         {
             Image imageComponent = statusBar[i].GetComponent<Image>();

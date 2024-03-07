@@ -2,8 +2,6 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Android;
-using System;
-using System.Collections.Generic;
 
 public class GPSManager : MonoBehaviour
 {
