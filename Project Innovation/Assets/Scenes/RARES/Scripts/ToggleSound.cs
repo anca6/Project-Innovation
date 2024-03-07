@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class ToggleSound : MonoBehaviour
 {
-    public void ToggleClick()
+    public void ToggleClick(string Click)
     {
-        FindObjectOfType<AudioManager>().Play("Click");
+        FindObjectOfType<AudioManager>().Play(Click);
     }
 }

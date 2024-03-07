@@ -455,12 +455,12 @@ PrefabInstance:
     - target: {fileID: 8820560121929385918, guid: 7e3bc00e32d234fe7967ec3568dbacf5,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8820560121929385918, guid: 7e3bc00e32d234fe7967ec3568dbacf5,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8820560121929385918, guid: 7e3bc00e32d234fe7967ec3568dbacf5,
         type: 3}
@@ -471,7 +471,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 394127793}
+      objectReference: {fileID: 1580666018}
     - target: {fileID: 8820560121929385918, guid: 7e3bc00e32d234fe7967ec3568dbacf5,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
@@ -485,7 +485,7 @@ PrefabInstance:
     - target: {fileID: 8820560121929385918, guid: 7e3bc00e32d234fe7967ec3568dbacf5,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: playButton
+      value: GoToThisScene
       objectReference: {fileID: 0}
     - target: {fileID: 8820560121929385918, guid: 7e3bc00e32d234fe7967ec3568dbacf5,
         type: 3}
@@ -495,7 +495,7 @@ PrefabInstance:
     - target: {fileID: 8820560121929385918, guid: 7e3bc00e32d234fe7967ec3568dbacf5,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: SfxManager, Assembly-CSharp
+      value: SceneManagement, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 8820560121929385918, guid: 7e3bc00e32d234fe7967ec3568dbacf5,
         type: 3}
@@ -505,7 +505,7 @@ PrefabInstance:
     - target: {fileID: 8820560121929385918, guid: 7e3bc00e32d234fe7967ec3568dbacf5,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: 
+      value: GARDEN_RA
       objectReference: {fileID: 0}
     - target: {fileID: 8820560121929385918, guid: 7e3bc00e32d234fe7967ec3568dbacf5,
         type: 3}
@@ -656,7 +656,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1f0fb80f1c9e3940b31bd4a6cad8968, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sfx: {fileID: 394127792}
+  sounds: []
 --- !u!1001 &408043170
 PrefabInstance:
   m_ObjectHideFlags: 0
