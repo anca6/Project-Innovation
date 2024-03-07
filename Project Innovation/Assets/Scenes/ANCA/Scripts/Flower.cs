@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -81,6 +82,12 @@ public class Flower : MonoBehaviour
         // Loop through all child GameObjects (stages) and set them to inactive
         foreach (Transform child in transform)
         {
+            TextMeshPro textComponent = GetComponentInChildren<TextMeshPro>();
+            if (textComponent)
+            {
+                child.gameObject.SetActive(true);
+            }
+            else 
             child.gameObject.SetActive(false);
         }
 
