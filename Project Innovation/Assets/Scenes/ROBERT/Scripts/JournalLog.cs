@@ -3,7 +3,8 @@ using UnityEngine;
 
 public class JournalLog : MonoBehaviour
 {
-    public static JournalLog Instance { get; private set; }
+    public static JournalLog Instance;
+
 
     [SerializeField] private List<JournalEntry> journalEntries = new List<JournalEntry>();
     private int currentItemIndex = 0;
@@ -11,15 +12,11 @@ public class JournalLog : MonoBehaviour
     private void Awake()
     {
         if (Instance == null)
-        {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
         else
-        {
             Destroy(gameObject);
-        }
     }
+
 
     private void Update()
     {
@@ -55,16 +52,6 @@ public class JournalLog : MonoBehaviour
         }
     }
 
- /*   private int FindNextUnlockedEntry(int startIndex)
-    {
-        int nextIndex = startIndex;
-        do
-        {
-            nextIndex = (nextIndex + 1) % journalEntries.Count;
-        } while (!journalEntries[nextIndex].IsUnlocked && nextIndex != startIndex);
-
-        return nextIndex;
-    }*/
 
     public void NavigateToNextUnlockedEntry()
     {
