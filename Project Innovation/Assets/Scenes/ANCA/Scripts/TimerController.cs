@@ -5,14 +5,14 @@ public class TimerController : MonoBehaviour
 {
     public TextMeshProUGUI timerText;
     public TextMeshProUGUI growthTimerText;
-    private float startTime;
-    private float growthStartTime; 
-    private bool timerStarted = false;
-    private bool growthTimerStarted = false;
-    public float duration = 30f;
-    public float growthDuration = 30f;
 
-    private Flower flower;
+    private float startTime;
+    private bool timerStarted = false;
+    public float duration = 30f;
+   
+    public float growthStartTime; 
+    public bool growthTimerStarted = false;
+    public float growthDuration = 30f;
 
     private void Update()
     {

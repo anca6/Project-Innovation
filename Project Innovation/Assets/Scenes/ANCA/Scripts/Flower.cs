@@ -24,13 +24,6 @@ public class Flower : MonoBehaviour
     [SerializeField] 
     TimerController timerController;
 
-    [SerializeField]
-    TimerController growthTimerController;
-
-    private bool growthTimerStarted = false;
-    private float growthStartTime;
-    public float growthDuration = 30f; 
-
     private void Start()
     {
         resourceManager = FindObjectOfType<ResourceManager>();
@@ -40,13 +33,13 @@ public class Flower : MonoBehaviour
 
     private void Update()
     {
-        if (growthTimerStarted)
+        if (timerController.growthTimerStarted)
         {
-            float elapsedTime = Time.time - growthStartTime;
-            if (elapsedTime >= growthDuration)
+            float elapsedTime = Time.time - timerController.growthStartTime;
+            if (elapsedTime >= timerController.growthDuration)
             {
                 Grow();
-                timerController.StartGrowthTimer(); // Restart the growth timer for the next stage
+                timerController.ResetGrowthTimer();
             }
         }
     }
