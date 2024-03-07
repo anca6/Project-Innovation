@@ -1634,6 +1634,61 @@ MonoBehaviour:
   - name: Ariensplein
     position: {x: 52.21891, y: 6.88804}
     landmarkObject: {fileID: 1093332472}
+--- !u!1 &1209169365
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1209169367}
+  - component: {fileID: 1209169366}
+  m_Layer: 0
+  m_Name: Entries
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1209169366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1209169365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 549402d599c8d4cd08d0c08d4e49b11e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  journalEntries:
+  - GameObject: {fileID: 0}
+    IsUnlocked: 0
+  - GameObject: {fileID: 0}
+    IsUnlocked: 0
+  - GameObject: {fileID: 0}
+    IsUnlocked: 0
+--- !u!224 &1209169367
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1209169365}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 217.30798}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 31.878326, y: 2}
+  m_SizeDelta: {x: 606.8481, y: 1080}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1258808049
 GameObject:
   m_ObjectHideFlags: 0
@@ -1713,61 +1768,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1258808049}
   m_CullTransparentMesh: 1
---- !u!1 &1267209708
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1267209710}
-  - component: {fileID: 1267209709}
-  m_Layer: 0
-  m_Name: Entries
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1267209709
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1267209708}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 549402d599c8d4cd08d0c08d4e49b11e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  journalEntries:
-  - GameObject: {fileID: 0}
-    IsUnlocked: 0
-  - GameObject: {fileID: 0}
-    IsUnlocked: 0
-  - GameObject: {fileID: 0}
-    IsUnlocked: 0
---- !u!224 &1267209710
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1267209708}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 217.30798}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 31.878326, y: 2}
-  m_SizeDelta: {x: 606.8481, y: 1080}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1430216764
 GameObject:
   m_ObjectHideFlags: 0
@@ -2860,7 +2860,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventorySlots: []
   itemSprites: []
-  journalLog: {fileID: 1267209709}
+  journalLog: {fileID: 0}
 --- !u!1 &1938985654
 GameObject:
   m_ObjectHideFlags: 0
@@ -3160,5 +3160,5 @@ SceneRoots:
   - {fileID: 58721629}
   - {fileID: 1430216765}
   - {fileID: 1864794280}
-  - {fileID: 1267209710}
   - {fileID: 2120432619}
+  - {fileID: 1209169367}
