@@ -18,12 +18,9 @@ public class Resource : MonoBehaviour
         //if (landmarkManager != null && landmarkManager.canClick)
         //{
             resourceManager.AddElixir(1);
-            //inventoryManager.AddSeed(new Flower());
+        //inventoryManager.AddSeed(new Flower());
 
-            Debug.Log("RESOURCE ADDED");
-
-            //gameObject.SetActive(false);
-
+        Debug.Log("RESOURCE ADDED");
         //}
     }
 }

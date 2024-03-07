@@ -4,13 +4,13 @@ using TMPro;
 public class TimerController : MonoBehaviour
 {
     public TextMeshProUGUI timerText;
-    public TextMeshProUGUI growthTimerText; // Text object for the growth timer
+    public TextMeshProUGUI growthTimerText;
     private float startTime;
-    private float growthStartTime; // Start time for the growth timer
+    private float growthStartTime; 
     private bool timerStarted = false;
     private bool growthTimerStarted = false;
     public float duration = 30f;
-    public float growthDuration = 30f; // Duration for each growth stage in seconds
+    public float growthDuration = 30f;
 
     private Flower flower;
 
@@ -71,7 +71,7 @@ public class TimerController : MonoBehaviour
     public void HideTimer()
     {
         timerText.gameObject.SetActive(false);
-        growthTimerText.gameObject.SetActive(false); // Hide growth timer text
+        growthTimerText.gameObject.SetActive(false);
     }
 
     private void UpdateTimer()
@@ -93,15 +93,15 @@ public class TimerController : MonoBehaviour
         if (remainingTime <= 0f)
         {
             StopGrowthTimer();
-            // Call the Grow method to grow the flower
-            Flower flower = FindObjectOfType<Flower>(); // Find the Flower component
+            
+            Flower flower = FindObjectOfType<Flower>();
             if (flower != null)
             {
-                flower.Grow(); // Call the Grow method
+                flower.Grow();
             }
             else
             {
-                Debug.LogWarning("Flower component not found.");
+                Debug.LogWarning("flower component not found");
             }
         }
     }

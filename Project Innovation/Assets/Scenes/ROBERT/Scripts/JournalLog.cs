@@ -13,11 +13,11 @@ public class JournalLog : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject); // Make the GameObject persistent
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
-            Destroy(gameObject); // Destroy duplicates
+            Destroy(gameObject);
         }
     }
 
@@ -55,7 +55,7 @@ public class JournalLog : MonoBehaviour
         }
     }
 
-    private int FindNextUnlockedEntry(int startIndex)
+ /*   private int FindNextUnlockedEntry(int startIndex)
     {
         int nextIndex = startIndex;
         do
@@ -64,7 +64,7 @@ public class JournalLog : MonoBehaviour
         } while (!journalEntries[nextIndex].IsUnlocked && nextIndex != startIndex);
 
         return nextIndex;
-    }
+    }*/
 
     public void NavigateToNextUnlockedEntry()
     {
@@ -115,14 +115,12 @@ public class JournalLog : MonoBehaviour
     {
         currentItemIndex++;
     }
-
-    // Method to unlock a journal entry
     public void UnlockEntry(int entryIndex)
     {
         if (entryIndex >= 0 && entryIndex < journalEntries.Count)
         {
             journalEntries[entryIndex].IsUnlocked = true;
-            currentItemIndex = entryIndex; // Update the currentItemIndex to the unlocked entry
+            currentItemIndex = entryIndex;
         }
     }
 
@@ -131,13 +129,12 @@ public class JournalLog : MonoBehaviour
 [System.Serializable]
 public class JournalEntry
 {
-    public GameObject GameObject; // Reference to the GameObject representing the journal entry
-    public bool IsUnlocked; // Indicates whether the journal entry is unlocked
+    public GameObject GameObject;
+    public bool IsUnlocked;
 
-    // Constructor to initialize a journal entry
     public JournalEntry(GameObject gameObject)
     {
         GameObject = gameObject;
-        IsUnlocked = false; // Default to locked
+        IsUnlocked = false;
     }
 }
