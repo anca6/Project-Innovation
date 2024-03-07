@@ -15,6 +15,8 @@ public class JournalLog : MonoBehaviour
             Instance = this;
         else
             Destroy(gameObject);
+
+        DontDestroyOnLoad(gameObject);
     }
 
 
@@ -108,6 +110,7 @@ public class JournalLog : MonoBehaviour
         {
             journalEntries[entryIndex].IsUnlocked = true;
             currentItemIndex = entryIndex;
+            
         }
     }
 

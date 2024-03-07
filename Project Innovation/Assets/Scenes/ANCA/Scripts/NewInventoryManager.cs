@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class NewInventoryManager : MonoBehaviour
-{
+{ 
     public GameObject[] inventorySlots;
     public Sprite[] itemSprites;
 
