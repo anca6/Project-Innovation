@@ -4,8 +4,8 @@ using UnityEngine.UI;
 
 public class NewInventoryManager : MonoBehaviour
 {
-    public GameObject[] inventorySlots; // Array of UI Image objects representing the inventory slots
-    public Sprite[] itemSprites; // Array of Sprites for the items
+    public GameObject[] inventorySlots;
+    public Sprite[] itemSprites;
 
     public List<Seed> seedInventory = new List<Seed>();
 
@@ -13,10 +13,9 @@ public class NewInventoryManager : MonoBehaviour
 
     void Start()
     {
-        // Initialize inventory slots
         for (int i = 0; i < inventorySlots.Length; i++)
         {
-            inventorySlots[i].GetComponent<Image>().sprite = null; // Clear the slot
+            inventorySlots[i].GetComponent<Image>().sprite = null;
         }
     }
 
@@ -26,23 +25,21 @@ public class NewInventoryManager : MonoBehaviour
         {
             if (seed.Type == seedType)
             {
-                return true; // Found the seed type in the inventory
+                return true;
             }
         }
-        return false; // Seed type not found in the inventory
+        return false;
     }
 
     public void UnlockJournalEntry(int entryIndex)
     {
-        // Find the JournalLog instance in the scene
         if (journalLog != null)
         {
-                // Call the UnlockEntry method with the specified entry index
                 journalLog.UnlockEntry(entryIndex);
             }
         else
         {
-            Debug.LogWarning("JournalLog instance not found.");
+            Debug.LogWarning("journalLog instance not found");
         }
     }
 
@@ -72,7 +69,7 @@ public class NewInventoryManager : MonoBehaviour
         Sprite sprite = Resources.Load<Sprite>(path);
         if (sprite == null)
         {
-            Debug.LogError($"Failed to load sprite for seed type: {type}");
+            Debug.LogError($"failed to load sprite for seed type: {type}");
         }
         return sprite;
     }
