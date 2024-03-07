@@ -14,6 +14,8 @@ public class TimerController : MonoBehaviour
     public bool growthTimerStarted = false;
     public float growthDuration = 30f;
 
+    public bool growthTimerElapsed = false;
+
     private void Update()
     {
         if (timerStarted)
@@ -92,12 +94,17 @@ public class TimerController : MonoBehaviour
         UpdateText(growthTimerText, remainingTime);
         if (remainingTime <= 0f)
         {
-            StopGrowthTimer();
+            growthTimerElapsed = true;
+            //StopGrowthTimer();
             
             Flower flower = FindObjectOfType<Flower>();
             if (flower != null)
             {
+                if(growthTimerElapsed == true)
+                {
                 flower.Grow();
+
+                }
             }
             else
             {

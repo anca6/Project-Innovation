@@ -13,11 +13,12 @@ public class Resource : MonoBehaviour
 
     [SerializeField]
     LandmarkManager landmarkManager;
-    public void OnMouseDown()
+    public void OnClick()
     {
         //if (landmarkManager != null && landmarkManager.canClick)
         //{
             resourceManager.AddElixir(1);
+            gameObject.SetActive(false);
         //inventoryManager.AddSeed(new Flower());
 
         Debug.Log("RESOURCE ADDED");

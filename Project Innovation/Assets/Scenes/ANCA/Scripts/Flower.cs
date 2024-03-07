@@ -46,7 +46,7 @@ public class Flower : MonoBehaviour
 
     public void Grow()
     {
-        if (resourceManager.elixir >= 1)
+        if (/*timerController.growthTimerElapsed ||*/ resourceManager.elixir >= 1)
         {
             if (currentStage < totalStages - 1) 
             {
@@ -78,7 +78,7 @@ public class Flower : MonoBehaviour
                 Debug.Log("flower reached last stage");
             }
         }
-        else
+        else /*if(timerController.grow)*/
         {
             Debug.Log("not enough elixir!");
         }
