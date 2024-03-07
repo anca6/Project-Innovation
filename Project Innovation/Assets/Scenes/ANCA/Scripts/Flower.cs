@@ -1,6 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Flower : MonoBehaviour
 {
@@ -11,7 +11,18 @@ public class Flower : MonoBehaviour
     [SerializeField]
     public GameObject[] stagePrefabs;
 
+    [SerializeField]
+    public GameObject[] statusBar;
+
     private ResourceManager resourceManager;
+
+    public JournalLog journalLog;
+
+    [SerializeField]
+    private int entryIndex;
+
+    [SerializeField] 
+    TimerController timerController;
 
     private void Start()
     {
@@ -19,12 +30,25 @@ public class Flower : MonoBehaviour
         currentStage = GameManager.instance.flowerStage;
         resourceManager.elixir = GameManager.instance.elixirCount;
     }
+
+    private void Update()
+    {
+        if (timerController.growthTimerStarted)
+        {
+            float elapsedTime = Time.time - timerController.growthStartTime;
+            if (elapsedTime >= timerController.growthDuration)
+            {
+                Grow();
+                timerController.ResetGrowthTimer();
+            }
+        }
+    }
+
     public void Grow()
     {
-        if (resourceManager.elixir >= 1)
+        if (/*timerController.growthTimerElapsed ||*/ resourceManager.elixir >= 1)
         {
-
-            if (currentStage < totalStages)
+            if (currentStage < totalStages - 1) 
             {
                 currentStage++;
                 GameManager.instance.flowerStage++;
@@ -32,14 +56,29 @@ public class Flower : MonoBehaviour
                 resourceManager.UseElixir(1);
                 GameManager.instance.elixirCount--;
 
+                timerController.ResetGrowthTimer();
+
+                
                 UpdateVisualStage();
+
+                
+                UpdateStatusBarColors();
+            }
+            else if (currentStage == totalStages - 1)
+            {
+                journalLog.UnlockEntry(entryIndex);
+                Debug.Log("3rd entry!");
+
+                timerController.StopTimer();
+                timerController.StopGrowthTimer();
+                timerController.HideTimer();
             }
             else
             {
                 Debug.Log("flower reached last stage");
             }
         }
-        else
+        else /*if(timerController.grow)*/
         {
             Debug.Log("not enough elixir!");
         }
@@ -47,8 +86,11 @@ public class Flower : MonoBehaviour
 
     public GameObject GetStagePrefab()
     {
+
+       
         if (currentStage < stagePrefabs.Length)
         {
+           
             return stagePrefabs[currentStage];
         }
         else
@@ -60,27 +102,54 @@ public class Flower : MonoBehaviour
 
     public void UpdateVisualStage()
     {
-        // Loop through all child GameObjects (stages) and set them to inactive
+        
         foreach (Transform child in transform)
         {
             child.gameObject.SetActive(false);
         }
 
-        // Set the current stage to active
-        if (GameManager.instance.flowerStage < transform.childCount)
+        if (currentStage < transform.childCount)
         {
-            transform.GetChild(GameManager.instance.flowerStage).gameObject.SetActive(true);
+            transform.GetChild(currentStage).gameObject.SetActive(true);
         }
         else
         {
-            //Debug.LogError("current stage index is out of bounds");
-            //show ui (this plant cant be grown anymore or sm like that)
+            Debug.LogError("current stage index is out of bounds");
         }
     }
 
+    public void UpdateStatusBarColors()
+    {
+        for (int i = 0; i < statusBar.Length; i++)
+        {
+            Image imageComponent = statusBar[i].GetComponent<Image>();
+            if (imageComponent != null)
+            {
+                if (i < currentStage)
+                {
+                    imageComponent.color = Color.green;
+                }
+                else if (i == currentStage)
+                {
+                    imageComponent.color = Color.green;
+                }
+                else
+                {
+                    imageComponent.color = Color.red;
+                }
+            }
+            else
+            {
+                Debug.LogWarning($"rectangle {i} does not have an image component");
+            }
+        }
+    }
+
+
     private void OnEnable()
     {
-        UpdateVisualStage ();
+        UpdateVisualStage();
+        UpdateStatusBarColors();
     }
 
 }

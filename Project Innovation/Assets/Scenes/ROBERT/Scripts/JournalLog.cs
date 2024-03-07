@@ -1,13 +1,25 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Numerics;
 using UnityEngine;
 
 public class JournalLog : MonoBehaviour
 {
+    public static JournalLog Instance { get; private set; }
 
-    [SerializeField] private List<GameObject> items = new List<GameObject>(); //setup array list
-    private int currentItem = 0; //bool to keep track of the current item
+    [SerializeField] private List<JournalEntry> journalEntries = new List<JournalEntry>();
+    private int currentItemIndex = 0;
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     private void Update()
     {
@@ -16,41 +28,113 @@ public class JournalLog : MonoBehaviour
     }
 
     private void ActivateLog()
-    { //takes control of activating items
-        for (int i = 0; i < items.Count; i++)
+    {
+        int activeIndex = -1;
+        for (int i = 0; i < journalEntries.Count; i++)
         {
-            if (i == currentItem)
+            if (journalEntries[i].IsUnlocked)
             {
-                items[i].SetActive(true);
+                if (currentItemIndex == i)
+                {
+                    activeIndex = i;
+                    break;
+                }
+                else if (activeIndex == -1)
+                {
+                    activeIndex = i;
+                }
             }
-            else
+        }
+
+        if (activeIndex != -1)
+        {
+            for (int i = 0; i < journalEntries.Count; i++)
             {
-                items[i].SetActive(false);
+                journalEntries[i].GameObject.SetActive(i == activeIndex);
             }
         }
     }
 
-    private void CheckCurrentLog()
-    { //make sure current item doesn't exceed the list
-        if (currentItem < 0)
+ /*   private int FindNextUnlockedEntry(int startIndex)
+    {
+        int nextIndex = startIndex;
+        do
         {
-            currentItem = items.Count - 1;
+            nextIndex = (nextIndex + 1) % journalEntries.Count;
+        } while (!journalEntries[nextIndex].IsUnlocked && nextIndex != startIndex);
+
+        return nextIndex;
+    }*/
+
+    public void NavigateToNextUnlockedEntry()
+    {
+        int nextIndex = currentItemIndex + 1;
+        while (nextIndex < journalEntries.Count && !journalEntries[nextIndex].IsUnlocked)
+        {
+            nextIndex++;
         }
-        if (currentItem > items.Count - 1)
+        if (nextIndex < journalEntries.Count)
         {
-            currentItem = 0;
+            currentItemIndex = nextIndex;
+            ActivateLog();
+        }
+    }
+
+    public void NavigateToPreviousUnlockedEntry()
+    {
+        int prevIndex = currentItemIndex - 1;
+        while (prevIndex >= 0 && !journalEntries[prevIndex].IsUnlocked)
+        {
+            prevIndex--;
+        }
+        if (prevIndex >= 0)
+        {
+            currentItemIndex = prevIndex;
+            ActivateLog();
+        }
+    }
+
+    private void CheckCurrentLog()
+    {
+        if (currentItemIndex < 0)
+        {
+            currentItemIndex = journalEntries.Count - 1;
+        }
+        if (currentItemIndex >= journalEntries.Count)
+        {
+            currentItemIndex = 0;
         }
     }
 
     public void SelectPreviousItem()
     {
-        currentItem--;
+        currentItemIndex--;
     }
 
-    // Public method to select the next item
     public void SelectNextItem()
     {
-        currentItem++;
+        currentItemIndex++;
+    }
+    public void UnlockEntry(int entryIndex)
+    {
+        if (entryIndex >= 0 && entryIndex < journalEntries.Count)
+        {
+            journalEntries[entryIndex].IsUnlocked = true;
+            currentItemIndex = entryIndex;
+        }
     }
 
+}
+
+[System.Serializable]
+public class JournalEntry
+{
+    public GameObject GameObject;
+    public bool IsUnlocked;
+
+    public JournalEntry(GameObject gameObject)
+    {
+        GameObject = gameObject;
+        IsUnlocked = false;
+    }
 }

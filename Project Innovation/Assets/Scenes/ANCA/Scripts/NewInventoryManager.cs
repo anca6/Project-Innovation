@@ -4,17 +4,42 @@ using UnityEngine.UI;
 
 public class NewInventoryManager : MonoBehaviour
 {
-    public GameObject[] inventorySlots; // Array of UI Image objects representing the inventory slots
-    public Sprite[] itemSprites; // Array of Sprites for the items
+    public GameObject[] inventorySlots;
+    public Sprite[] itemSprites;
 
     public List<Seed> seedInventory = new List<Seed>();
 
+    public JournalLog journalLog;
+
     void Start()
     {
-        // Initialize inventory slots
         for (int i = 0; i < inventorySlots.Length; i++)
         {
-            inventorySlots[i].GetComponent<Image>().sprite = null; // Clear the slot
+            inventorySlots[i].GetComponent<Image>().sprite = null;
+        }
+    }
+
+    public bool HasSeedType(string seedType)
+    {
+        foreach (Seed seed in seedInventory)
+        {
+            if (seed.Type == seedType)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void UnlockJournalEntry(int entryIndex)
+    {
+        if (journalLog != null)
+        {
+                journalLog.UnlockEntry(entryIndex);
+            }
+        else
+        {
+            Debug.LogWarning("journalLog instance not found");
         }
     }
 
@@ -22,7 +47,6 @@ public class NewInventoryManager : MonoBehaviour
     {
         for (int i = 0; i < inventorySlots.Length; i++)
         {
-            //Image spriteImage = GetComponent<Image>();
             if (inventorySlots[i].GetComponent<Image>().sprite == null)
             {
                 inventorySlots[i].GetComponent<Image>().sprite = itemSprite;
@@ -30,12 +54,11 @@ public class NewInventoryManager : MonoBehaviour
             }
         }
     }
+
     public void AddSeedToInventory(Seed seed)
     {
-        // Add the seed to the list of seeds in the inventory
         seedInventory.Add(seed);
 
-        // Find the corresponding sprite for the seed and add it to the inventory
         Sprite seedSprite = GetSeedSprite(seed.Type);
         AddItemToInventory(seedSprite);
     }
@@ -46,9 +69,8 @@ public class NewInventoryManager : MonoBehaviour
         Sprite sprite = Resources.Load<Sprite>(path);
         if (sprite == null)
         {
-            Debug.LogError($"Failed to load sprite for seed type: {type}");
+            Debug.LogError($"failed to load sprite for seed type: {type}");
         }
         return sprite;
     }
-
 }

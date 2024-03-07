@@ -9,7 +9,7 @@ public class Resource : MonoBehaviour
     ResourceManager resourceManager;
 
     [SerializeField]
-    InventoryManager inventoryManager;
+    NewInventoryManager inventoryManager;
 
     [SerializeField]
     LandmarkManager landmarkManager;
@@ -18,12 +18,10 @@ public class Resource : MonoBehaviour
         //if (landmarkManager != null && landmarkManager.canClick)
         //{
             resourceManager.AddElixir(1);
-            //inventoryManager.AddSeed(new Flower());
-
-            Debug.Log("RESOURCE ADDED");
-
             gameObject.SetActive(false);
+        //inventoryManager.AddSeed(new Flower());
 
+        Debug.Log("RESOURCE ADDED");
         //}
     }
 }

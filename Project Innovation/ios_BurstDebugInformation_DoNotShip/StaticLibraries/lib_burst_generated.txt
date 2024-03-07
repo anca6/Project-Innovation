@@ -25,6 +25,7 @@ Library: /Volumes/roach/Projects/Project-Innovation/Project Innovation/Temp/Burs
 --assembly-defines=Unity.RenderPipeline.Universal.ShaderLibrary;
 --assembly-defines=Unity.RenderPipelines.Core.Runtime;
 --assembly-defines=Unity.RenderPipelines.Universal.Runtime;
+--assembly-defines=Unity.TextMeshPro;
 --assembly-defines=UnityEngine;
 --assembly-defines=Vuforia.Unity.Engine;
 --assembly-defines=Vuforia.Unity.Wrapper;
@@ -66,6 +67,7 @@ Library: /Volumes/roach/Projects/Project-Innovation/Project Innovation/Temp/Burs
 --assembly-defines=Unity.RenderPipeline.Universal.ShaderLibrary;
 --assembly-defines=Unity.RenderPipelines.Core.Runtime;
 --assembly-defines=Unity.RenderPipelines.Universal.Runtime;
+--assembly-defines=Unity.TextMeshPro;
 --assembly-defines=UnityEngine;
 --assembly-defines=Vuforia.Unity.Engine;
 --assembly-defines=Vuforia.Unity.Wrapper;
