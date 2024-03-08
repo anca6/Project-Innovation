@@ -2,32 +2,22 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
-    private bool backgroundMusicMuted = false;
-    private bool soundEffectsMuted = false;
+    public AudioSource backgroundMusic; // Reference to the AudioSource component that plays the background music
 
-    public void ToggleBackgroundMusicMute()
+    private bool isMuted = false; // Variable to keep track of mute state
+
+    private void Start()
     {
-        backgroundMusicMuted = !backgroundMusicMuted;
-        UpdateBackgroundMusicVolume();
+        // Ensure that the background music is initially unmuted
+        backgroundMusic.volume = 1f;
     }
 
-    public void ToggleSoundEffectsMute()
+    // Function to toggle background music on/off
+    public void ToggleMusic()
     {
-        soundEffectsMuted = !soundEffectsMuted;
-        UpdateSoundEffectsVolume();
-    }
+        isMuted = !isMuted; // Toggle mute state
 
-    private void UpdateBackgroundMusicVolume()
-    {
-        float volume = backgroundMusicMuted ? 0 : 1;
-        // Replace "backgroundMusicSource" with your actual AudioSource variable for background music
-        // Example: backgroundMusicSource.volume = volume;
-    }
-
-    private void UpdateSoundEffectsVolume()
-    {
-        float volume = soundEffectsMuted ? 0 : 1;
-        // Replace "soundEffectsSource" with your actual AudioSource variable for sound effects
-        // Example: soundEffectsSource.volume = volume;
+        // If muted, set volume to 0; otherwise, set volume to 1
+        backgroundMusic.volume = isMuted ? 0f : 1f;
     }
 }
