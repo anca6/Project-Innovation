@@ -3,13 +3,16 @@ using UnityEngine.UI;
 
 public class Flower : MonoBehaviour
 {
+    //variables to keep track of detailed object status
     public string type;
     public int currentStage;
     public int totalStages;
 
+    //list of prefabs for different stage visualisation
     [SerializeField]
     public GameObject[] stagePrefabs;
 
+    //list of gameobjects set up as a status bar
     [SerializeField]
     public GameObject[] statusBar;
 
@@ -20,16 +23,19 @@ public class Flower : MonoBehaviour
     [SerializeField]
     private int entryIndex;
 
+    //reference to timer controller for life-span and growth process
     [SerializeField] 
     TimerController timerController;
 
     private void Start()
     {
+        //initializing managers
         resourceManager = FindObjectOfType<ResourceManager>();
         currentStage = GameManager.instance.flowerStage;
         resourceManager.elixir = GameManager.instance.elixirCount;
     }
 
+    //checks if flower lived to the next stage before it dies
     private void Update()
     {
         if (timerController.growthTimerStarted)
@@ -37,91 +43,78 @@ public class Flower : MonoBehaviour
             float elapsedTime = Time.time - timerController.growthStartTime;
             if (elapsedTime >= timerController.growthDuration)
             {
+                //flower goes to next stage and timer is reset for next growth check
                 Grow();
                 timerController.ResetGrowthTimer();
             }
         }
     }
-
+    
+    //entire logic of growing the flowers
     public void Grow()
     {
-        if (timerController.growthTimerElapsed || resourceManager.elixir >= 1)
+        if (timerController.growthTimerElapsed || resourceManager.elixir >= 1) //if the flower lived to the next stage or the player has elixir in its inventory
         {
-            if (currentStage < totalStages - 1) 
+            if (currentStage < totalStages - 1) //if flower didnt reach last growth stage
             {
                 currentStage++;
-                GameManager.instance.flowerStage++;
+                GameManager.instance.flowerStage++; //goes to next stage and updates universal growth status
 
                 resourceManager.UseElixir(1);
-                GameManager.instance.elixirCount--;
+                GameManager.instance.elixirCount--; //player uses elixir to grow flower to the next stage and updates inventory
 
                 timerController.ResetGrowthTimer();
 
-                
-                UpdateVisualStage();
 
-                
+                UpdateVisualStage();
                 UpdateStatusBarColors();
+
             }
             else if (currentStage == totalStages - 1)
             {
                 currentStage++;
-                GameManager.instance.flowerStage++;
-                journalLog.UnlockEntry(entryIndex);
-                Debug.Log("3rd entry!");
-                UpdateStatusBarColors();
+                GameManager.instance.flowerStage++; //next growth stage
+
+                journalLog.UnlockEntry(entryIndex); //unlockes a new entry in the journal
+
+                UpdateVisualStage();
+                UpdateStatusBarColors(); //updates the prefab and status bar
+
                 timerController.StopTimer();
                 timerController.StopGrowthTimer();
-                timerController.HideTimer();
+                timerController.HideTimer(); //stops all timers
             }
-            else
-            {
-                Debug.Log("flower reached last stage");
-            }
-        }
-        else /*if(timerController.grow)*/
-        {
-            Debug.Log("not enough elixir!");
         }
     }
-
+    
     public GameObject GetStagePrefab()
     {
-
-       
         if (currentStage < stagePrefabs.Length)
         {
-           
             return stagePrefabs[currentStage];
         }
-        else
-        {
-            Debug.Log("flower is at its last stage");
-            return null;
-        }
+        else return null;
     }
 
+    //updates the flower growth visually with prefabs
     public void UpdateVisualStage()
     {
         
         foreach (Transform child in transform)
         {
-            child.gameObject.SetActive(false);
+            child.gameObject.SetActive(false); //setting all stages inactive initially
         }
 
+        //if the flower is not at its last growth stage we activate it
         if (currentStage < transform.childCount)
         {
-            transform.GetChild(currentStage).gameObject.SetActive(true);
-        }
-        else
-        {
-            Debug.LogError("current stage index is out of bounds");
+            transform.GetChild(currentStage).gameObject.SetActive(true); 
         }
     }
 
+    //updates the flower growth visually with status bar
     public void UpdateStatusBarColors()
     {
-        //Debug.LogWarning(currentStage);
         for (int i = 0; i < statusBar.Length; i++)
         {
             Image imageComponent = statusBar[i].GetComponent<Image>();
@@ -140,13 +133,8 @@ public class Flower : MonoBehaviour
                     imageComponent.color = Color.red;
                 }
             }
-            else
-            {
-                Debug.LogWarning($"rectangle {i} does not have an image component");
-            }
         }
     }
-
 
     private void OnEnable()
     {

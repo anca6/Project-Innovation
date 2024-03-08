@@ -4,13 +4,14 @@ using UnityEngine.UI;
 
 public class NewInventoryManager : MonoBehaviour
 { 
-    public GameObject[] inventorySlots;
+    public GameObject[] inventorySlots; //slots for the inventory grid
     public Sprite[] itemSprites;
 
-    public List<Seed> seedInventory = new List<Seed>();
+    public List<Seed> seedInventory = new List<Seed>(); //list of seeds added to the inventory
 
     public JournalLog journalLog;
 
+    //get the image component of each slot in the inventory
     void Start()
     {
         for (int i = 0; i < inventorySlots.Length; i++)
@@ -19,18 +20,7 @@ public class NewInventoryManager : MonoBehaviour
         }
     }
 
-    public bool HasSeedType(string seedType)
-    {
-        foreach (Seed seed in seedInventory)
-        {
-            if (seed.Type == seedType)
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-
+    //calls on the journal script to unlock an entry
     public void UnlockJournalEntry(int entryIndex)
     {
         if (journalLog != null)
@@ -43,6 +33,7 @@ public class NewInventoryManager : MonoBehaviour
         }
     }
 
+    //goes through all objects in the list and replaces the sprite to the chosen sprite asset
     public void AddItemToInventory(Sprite itemSprite)
     {
         for (int i = 0; i < inventorySlots.Length; i++)
@@ -55,6 +46,7 @@ public class NewInventoryManager : MonoBehaviour
         }
     }
 
+    //adds the seed type in the inventory list
     public void AddSeedToInventory(Seed seed)
     {
         seedInventory.Add(seed);
@@ -63,6 +55,7 @@ public class NewInventoryManager : MonoBehaviour
         AddItemToInventory(seedSprite);
     }
 
+    //searches for the seed sprite linked to each seed type and loads it from the resource folder
     private Sprite GetSeedSprite(string type)
     {
         string path = $"Sprites/Seeds/{type}";

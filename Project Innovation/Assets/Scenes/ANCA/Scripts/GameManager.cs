@@ -2,19 +2,21 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance;
+    public static GameManager instance; //singleton instance of the game manager
 
-    private bool buttonClicked = false;
+    private bool buttonClicked = false; //for the seed object in the explore scene
 
     public NewInventoryManager inventoryManager;
 
+    //keeping count of these variables
     [HideInInspector]
-    public int flowerStage;
+    public int flowerStage; 
     [HideInInspector]
     public int elixirCount;
     [HideInInspector]
     public int journalStage;
 
+    //method to be able to reference this object in any scene
     private void Awake()
     {
         if (instance == null)
@@ -25,17 +27,13 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    //method for the seed collecting logic
     public void SetButtonClicked(bool value)
     {
         buttonClicked = value;
         if (buttonClicked)
         {
-            // Unlock a journal entry
-            JournalLog.Instance.UnlockEntry(0); // Specify the index of the entry you want to unlock
-
-            /*// Add a seed to the inventory
-            Seed newSeed = new Seed("SeedType", "FlowerType", 1); // Replace "SeedType" and "FlowerType" with the actual types
-            inventoryManager.AddSeedToInventory(newSeed);*/
+            JournalLog.Instance.UnlockEntry(0); //unlocking the first entry in the journal
         }
     }
 

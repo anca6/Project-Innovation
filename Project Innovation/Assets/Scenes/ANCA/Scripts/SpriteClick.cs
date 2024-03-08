@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class SpriteClick : MonoBehaviour
 {
-    public Button plantButton;
+    public Button plantButton; //plant button to add flower to growth panel
 
     private void Start()
     {

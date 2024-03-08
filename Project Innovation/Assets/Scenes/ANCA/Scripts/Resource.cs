@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Resource : MonoBehaviour
 {
+    //class for the resource gameobjects
     [SerializeField]
     GameManager gameManager;
 
@@ -15,13 +16,8 @@ public class Resource : MonoBehaviour
     LandmarkManager landmarkManager;
     public void OnClick()
     {
-        //if (landmarkManager != null && landmarkManager.canClick)
-        //{
-            resourceManager.AddElixir(1);
-            gameObject.SetActive(false);
-        //inventoryManager.AddSeed(new Flower());
-
-        Debug.Log("RESOURCE ADDED");
-        //}
+        //if collected, adds 1 elixir and deactivates the object
+        resourceManager.AddElixir(1);
+        gameObject.SetActive(false); 
     }
 }

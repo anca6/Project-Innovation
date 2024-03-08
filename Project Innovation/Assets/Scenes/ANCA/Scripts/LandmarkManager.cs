@@ -5,9 +5,8 @@ public class LandmarkManager : MonoBehaviour
 {
     public float landmarkRadius = 100f; //landmark radius in meters to detect proximity
 
-    public Vector2 playerPos;
+    public Vector2 playerPos; //to store player position in X,Y coord
 
-    //bool canClick = false;
     [System.Serializable]
     public class Landmark
     {
@@ -24,15 +23,13 @@ public class LandmarkManager : MonoBehaviour
     public void CheckProximity()
     {
         bool isInRadius = false;
-        //kvp = key-value pair
+
         foreach (Landmark kvp in landmarks)
-        //foreach (var landmark in landmarks.Values)
         {
             float distance = Vector2.Distance(playerPos, kvp.position);
 
             if (distance <= landmarkRadius)
-            {
-                //for the cube to turn green
+            { 
                 MeshRenderer meshRenderer = kvp.landmarkObject.GetComponent<MeshRenderer>();
                 meshRenderer.material.color = Color.green;
 

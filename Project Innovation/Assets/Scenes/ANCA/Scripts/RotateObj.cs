@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class RotateObj : MonoBehaviour
 {
+    //rotates the object on touch
     private void Update()
     {
         if (Input.touchCount == 1)

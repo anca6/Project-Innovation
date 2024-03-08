@@ -3,12 +3,13 @@ using UnityEngine;
 
 public class JournalLog : MonoBehaviour
 {
-    public static JournalLog Instance;
+    public static JournalLog Instance; //singleton instance of the journal manager
 
-
+    //list of gameobjects as journal entries
     [SerializeField] private List<JournalEntry> journalEntries = new List<JournalEntry>();
     private int currentItemIndex = 0;
 
+    //method to be able to reference this object in any scene
     private void Awake()
     {
         if (Instance == null)
@@ -26,16 +27,17 @@ public class JournalLog : MonoBehaviour
         CheckCurrentLog();
     }
 
+    //activate an entry if an action unlocked it
     private void ActivateLog()
     {
         int activeIndex = -1;
         for (int i = 0; i < journalEntries.Count; i++)
         {
-            if (journalEntries[i].IsUnlocked)
+            if (journalEntries[i].IsUnlocked) //if a journal entry has been unlocked
             {
                 if (currentItemIndex == i)
                 {
-                    activeIndex = i;
+                    activeIndex = i; //activate the gameobject
                     break;
                 }
                 else if (activeIndex == -1)
@@ -54,7 +56,7 @@ public class JournalLog : MonoBehaviour
         }
     }
 
-
+    //checking if an object is the last unlocked entry and moving onto the next unlocked one
     public void NavigateToNextUnlockedEntry()
     {
         int nextIndex = currentItemIndex + 1;
@@ -69,6 +71,7 @@ public class JournalLog : MonoBehaviour
         }
     }
 
+    //checking if an object is not the last entry and moving onto the previous unlocked one
     public void NavigateToPreviousUnlockedEntry()
     {
         int prevIndex = currentItemIndex - 1;
@@ -83,6 +86,7 @@ public class JournalLog : MonoBehaviour
         }
     }
 
+    //checking for out of bounds entries
     private void CheckCurrentLog()
     {
         if (currentItemIndex < 0)
@@ -95,15 +99,7 @@ public class JournalLog : MonoBehaviour
         }
     }
 
-    public void SelectPreviousItem()
-    {
-        currentItemIndex--;
-    }
-
-    public void SelectNextItem()
-    {
-        currentItemIndex++;
-    }
+    //sets entry as unlocked
     public void UnlockEntry(int entryIndex)
     {
         if (entryIndex >= 0 && entryIndex < journalEntries.Count)
@@ -115,7 +111,7 @@ public class JournalLog : MonoBehaviour
     }
 
 }
-
+    //journal entry class to assign entry gameobject and unlocked status
 [System.Serializable]
 public class JournalEntry
 {

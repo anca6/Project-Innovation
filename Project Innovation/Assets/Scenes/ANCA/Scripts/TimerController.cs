@@ -3,13 +3,16 @@ using TMPro;
 
 public class TimerController : MonoBehaviour
 {
+    //text to visualize the timer
     public TextMeshProUGUI timerText;
     public TextMeshProUGUI growthTimerText;
 
+    //variables to store life-span timer
     private float startTime;
     private bool timerStarted = false;
     public float duration = 30f;
    
+    //variables to store time until next growth stage
     public float growthStartTime; 
     public bool growthTimerStarted = false;
     public float growthDuration = 30f;
@@ -54,12 +57,9 @@ public class TimerController : MonoBehaviour
 
     public void ResetGrowthTimer()
     {
-       
         growthStartTime = Time.time;
 
-  
     }
-
     public void StopTimer()
     {
         timerStarted = false;
@@ -76,6 +76,7 @@ public class TimerController : MonoBehaviour
         growthTimerText.gameObject.SetActive(false);
     }
 
+    //if life-span reaches 0, timer stops and flower dies
     private void UpdateTimer()
     {
         float elapsedTime = Time.time - startTime;
@@ -84,20 +85,19 @@ public class TimerController : MonoBehaviour
         if (remainingTime <= 0f)
         {
             StopTimer();
+            Destroy(gameObject);
         }
     }
 
+    //flower grows to next stage
     private void UpdateGrowthTimer()
     {
-        //Debug.LogWarning("flower component not found");
         float elapsedTime = Time.time - growthStartTime;
         float remainingTime = Mathf.Max(0f, growthDuration - elapsedTime);
         UpdateText(growthTimerText, remainingTime);
-        //Debug.LogWarning(remainingTime);
         if (remainingTime <= 0.1f)
         {
             growthTimerElapsed = true;
-            //StopGrowthTimer();
             
             Flower flower = FindObjectOfType<Flower>();
             if (flower != null)
@@ -105,16 +105,12 @@ public class TimerController : MonoBehaviour
                 if(growthTimerElapsed == true)
                 {
                 flower.Grow();
-
                 }
-            }
-            else
-            {
-                Debug.LogWarning("flower component not found");
             }
         }
     }
 
+    //updates text objects
     private void UpdateText(TextMeshProUGUI textComponent, float remainingTime)
     {
         int minutes = Mathf.FloorToInt(remainingTime / 60f);
