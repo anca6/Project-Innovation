@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/ROBERT/Scenes/START.unity
     guid: 4e8eb309af26e4c77a06e65a943e877d
   - enabled: 1
-    path: Assets/Scenes/ROBERT/Scenes/GARDEN_XX.unity
+    path: Assets/Scenes/ROBERT/Scenes/GARDEN.unity
     guid: 8e23b1e96a8b9eb4fa6bd99f8119c396
   - enabled: 1
     path: Assets/Scenes/ROBERT/Scenes/AR.unity
